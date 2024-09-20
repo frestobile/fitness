@@ -1,0 +1,42 @@
+.bloc-choice{
+    padding: 1.5em;
+    h2{
+        margin-bottom: 50px;
+    }
+
+    p{
+        margin-bottom: 35px;
+    }
+}
+
+ion-grid{
+    ion-row{
+        background: var(--ion-color-gray-bold);
+        border-radius: 0.70rem;
+        margin-bottom: 15px;
+        height: 55px;
+        ion-col{
+            img{
+                height: 35px;
+            }
+
+            ion-label{
+                color: var(--ion-color-medium);
+                font-family: 'Urbanist-SemiBold';
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+.no_account{
+    margin-top: 10vh;
+    ion-text{
+        font-size: 0.8rem;
+        font-family: "Urbanist-SemiBold";
+    }
+
+    ion-text:last-child{
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,11 @@
+@import "../list-advert/list-advert.component.scss";
+
+ion-row{
+    ion-col:first-child{
+        padding-left: 15px;
+        .state{
+            color: var(--ion-color-primary);
+        }
+    }
+    border-bottom: 1px solid var(--ion-color-gray-bold);
+}

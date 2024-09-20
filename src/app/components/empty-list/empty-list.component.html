@@ -1,0 +1,11 @@
+<ion-item *ngFor="let item of [1,2,3,4,5,6]" lines="none" color="transparent">
+  <ion-avatar slot="start">
+    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+  </ion-avatar>
+  <ion-label>
+    <ion-label>
+      <h3><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+      <p><ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+    </ion-label>
+  </ion-label>
+</ion-item>

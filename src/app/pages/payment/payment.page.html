@@ -1,0 +1,144 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Paiement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <div>
+      <ion-card color="primary"
+        (click)="goTo('pay-form','PayPal','1234 9085 7645 5347','12/24','Kevin steves', 'assets/imgs/paypal.png','#007FFF','assets/imgs/img_paypal.png', 'assets/imgs/visa.png')">
+        <ion-card-header>
+          <ion-card-title class="card-number">**** **** **** 5347</ion-card-title>
+          <ion-card-subtitle>
+            <ion-grid>
+              <ion-row style="display: flex;justify-content: space-between;">
+                <div><img src="assets/imgs/paypal.png" height="21px" width="42px" /></div><img
+                  src="assets/imgs/signal.png" height="21px" width="21px" />
+              </ion-row>
+            </ion-grid>
+          </ion-card-subtitle>
+
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row style="display: flex;justify-content: space-between;">
+              <div><span class="text-content">Kevin Steves</span></div><span class="text-content">12/24</span>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background-color: #ffa406;"
+        (click)="goTo('pay-form','Apple pay','1234 9085 7645 5347','12/24','Kevin steves','assets/imgs/apple.png','#ffa406','assets/imgs/img_apple.png','assets/imgs/master.png')">
+        <ion-card-header>
+          <ion-card-title class="card-number">**** **** **** 5347</ion-card-title>
+          <ion-card-subtitle>
+            <ion-grid>
+              <ion-row style="display: flex;justify-content: space-between;">
+                <div><img src="assets/imgs/apple.png" height="21px" width="42px" /></div><img
+                  src="assets/imgs/signal.png" height="21px" width="21px" />
+              </ion-row>
+            </ion-grid>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row style="display: flex;justify-content: space-between;">
+              <div><span class="text-content">Kevin Steves</span></div><span class="text-content">12/24</span>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background-color: #12C5D0;"
+        (click)="goTo('pay-form','Master card','1234 9085 7645 5347','12/24','Kevin steves','assets/imgs/master.png','#12C5D0','assets/imgs/master.png')">
+        <ion-card-header>
+          <ion-card-title class="card-number">**** **** **** 5347</ion-card-title>
+          <ion-card-subtitle>
+            <ion-grid>
+              <ion-row style="display: flex;justify-content: space-between;">
+                <div><img src="assets/imgs/master.png" height="21px" width="42px" /></div><img
+                  src="assets/imgs/signal.png" height="21px" width="21px" />
+              </ion-row>
+            </ion-grid>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row style="display: flex;justify-content: space-between;">
+              <div><span class="text-content">Kevin Steves</span></div><span class="text-content">12/24</span>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div style="display: block; text-align: center;">
+      <span style="text-align: center;">ou</span>
+    </div>
+
+
+    <ion-grid>
+      <ion-row style="display: block ruby;">
+        <ion-card style="background-color: #000000;"
+          (click)="goTo('pay-form','Visa','1234 9085 7645 5347','12/24','Kevin steves','assets/imgs/visa.png','#000000','assets/imgs/img_visa.png')">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-grid>
+                <ion-row style="display: flex;justify-content: space-between;">
+                  <div><img src="assets/imgs/visa.png" height="21px" width="42px" /></div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                    src="assets/imgs/signal.png" height="21px" width="21px" />
+                </ion-row>
+              </ion-grid>
+            </ion-card-subtitle>
+
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <span style="font-size: 0.6rem;">12/24</span>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card style="background-color: #D6D2D2;"
+          (click)="goTo('pay-form','Google Pay','1234 9085 7645 5347','12/24','Kevin steves','assets/imgs/google_pay.png','#D6D2D2','assets/imgs/img_google_pay.png','assets/imgs/visa.png')">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-grid>
+                <ion-row style="display: flex;justify-content: space-between;">
+                  <div><img src="assets/imgs/google_pay.png" height="21px" width="42px" /></div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                    src="assets/imgs/base_signal.png" height="21px" width="21px" />
+                </ion-row>
+              </ion-grid>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <span style="font-size: 0.6rem; color:#9E9898;">12/24</span>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div style="display: block; text-align: center;">
+      <img src="assets/imgs/Ligne.png" width="145px" style="text-align: center;" />
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" class="mt-0">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ exercise?.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="light">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="video-block">
+    <!-- <img [src]="exercise?.image" alt="Session" *ngIf="!is_play" /> -->
+    <video class="video-style"  width="100%" loop [src]="exercise?.video_url" #video>
+      Your browser does not support the video tag.
+    </video>
+    <ion-icon class="icon-play" src="assets/icon/player.svg" (click)="playVideo()" *ngIf="!is_play"  ></ion-icon>
+    <ion-icon class="icon-stop" src="assets/icon/pause.svg" (click)="stopVideo()" *ngIf="is_play" ></ion-icon>
+  </div>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <h5 class="text-primary">Pour quelle partie du corps ?</h5>
+      </ion-col>
+      <ion-col >
+        <div class="description"> {{ exercise?.bodyparts?.join(", ") }} </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <div class="info m-2 ms-0"> {{ reps }} séries </div>
+      </ion-col>
+      <ion-col size="6" >
+        <div class="info m-2 me-0"> {{ time }} min</div>
+      </ion-col>
+      <ion-col size="6" >
+        <div class="info m-2 ms-0"> {{ rest }} de repos</div>
+      </ion-col>
+      <ion-col size="6" >
+        <div class="info m-2 me-0"> {{ weight }}  kg de charge </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="text-center">
+        <ion-button mode="ios" color="success" (click)="gotoTraining()">Suivant<ion-icon class="ms-4" name="time-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

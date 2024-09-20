@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mes Sessions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-empty-list *ngIf="is_pending"></app-empty-list>
+
+  <div *ngIf="!is_pending" class="list-boot">
+    <ion-item *ngFor="let session of mySessions" >
+      <ion-thumbnail slot="start">
+        <ion-img [src]="getImage(session)"></ion-img>
+      </ion-thumbnail>
+      <ion-label (click)="goToDetail(session.id)">
+        <h2>{{session.name}}</h2>
+        <div [innerHTML]="session.description"> </div>
+        <ion-text color="primary">{{ session.sporting_level }}</ion-text>
+        <p>{{session.schedules.length}} exericses</p>
+      </ion-label>
+      <span>
+        <strong slot="end">{{ session.price | currency:session.currency.name:'symbol':'1.0-0':lang }}</strong> <br>
+        <ion-toggle [enableOnOffLabels]="true" color="vert" [checked]="checkStatus('active')" (ionChange)="handleState($event, session)" aria-label="Session"></ion-toggle>
+      </span>
+    </ion-item>
+
+    <app-empty-view *ngIf="!mySessions.length"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" *ngIf="user_role=='coach'"  >
+    <ion-fab-button color="primary" (click)="goToCreateSession()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

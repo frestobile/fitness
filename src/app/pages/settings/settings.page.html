@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'settings.title' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+  <ion-card>
+    <ion-list>
+      <ion-item (click)="openModal()">
+        <ion-icon color="primary" name="planet" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>Abonnement</h2>
+          <p>Modifier le coût d'une session. Ceci sera applicable pour les prochaines sessions achetées</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item (click)="goToPage('preferences')">
+        <ion-icon color="primary" name="planet" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>Préférences</h2>
+          <p>Modifier les informations sur votre taille, poids et bien d'autres</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item>
+  
+  <!--     <ion-item [routerLink]="['change-language']">
+        <ion-icon color="primary" name="planet" slot="start"></ion-icon>
+        <ion-label>
+          <h2>{{'settings.language' | translate}}</h2>
+          <p>{{'settings.change_language' | translate}}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item> -->
+      <!-- <ion-item [routerLink]="['faq']">
+        <ion-icon color="primary" name="help-circle" slot="start"></ion-icon>
+        <ion-label>
+          <h2>{{'settings.faq' | translate}}</h2>
+          <p>{{'settings.find_questions' | translate}}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item> -->
+      <ion-item (click)="openInBrowser(terms)">
+        <ion-icon color="primary" name="document" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>{{'settings.terms_conditions' | translate}}</h2>
+          <p>{{'settings.read_before_engage' | translate}}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item (click)="openInBrowser(policies)">
+        <ion-icon color="primary" name="document-text" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>{{'settings.privacy_policies' | translate}}</h2>
+          <p>{{'settings.concerns_usage' | translate}}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" color="medium" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-item (click)="logOut()">
+        <ion-icon color="rouge" name="log-out-outline" slot="start"></ion-icon>
+        <ion-label color="rouge">
+          Se déconnecter
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="leaveApp()">
+        <ion-icon color="rouge" name="exit-outline" slot="start"></ion-icon>
+        <ion-label color="rouge">
+          Quitter l'application
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-modal #modal [isOpen]="is_opened" (didDismiss)="handleModal($event)" [breakpoints]="tabs" [initialBreakpoint]="init_breakpoint">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <p><strong>En modifiant votre tarif ($AU) par session, le nouveau coût s'appliquera aux prochaines sessions commandées</strong></p>
+        <div class="ion-margin-bottom ion-margin-top">
+          <ion-input 
+          type="number" 
+          [min]="0"
+          helperText="En modifiant votre tarif par session, le nouveau coût s'appliquera aux prochaines sessions commandées"
+          placeholder="Tarif par session ($AU)" 
+          [(ngModel)]="cost_session"
+          fill="outline">
+         </ion-input> 
+        </div>
+
+        <div class="ion-margin-top">
+          <ion-button [disabled]="is_pending" (click)="onUpdate()" expand="block" color="primary" shape="round" mode="ios">
+            Mettre à jour <ion-spinner *ngIf="is_pending" name="dots"></ion-spinner>
+          </ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

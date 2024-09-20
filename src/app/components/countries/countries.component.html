@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <ion-searchbar mode="ios" [(ngModel)]="txt_search" (ionInput)="getItems($event)" placeholder="Rechercher un pays"></ion-searchbar>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClose()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <!-- <ion-list-header>Select a country</ion-list-header> -->
+    <ion-item *ngFor="let obj of list_countries" (click)="selectCountry(obj)">
+      <span class="fi fi-{{obj.flagClass}}" slot="start"> </span>
+      <ion-label>(+{{obj.dialCode}}) {{obj.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

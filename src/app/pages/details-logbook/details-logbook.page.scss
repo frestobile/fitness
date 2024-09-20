@@ -1,0 +1,39 @@
+.bloc-history{
+
+    .txt-title{
+        h3{
+            margin-left: 1.3rem;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+    }
+
+    ion-grid{
+        padding: 1rem;
+        ion-row{
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            padding-top: 15px;
+            padding-bottom: 15px;
+
+            ion-col{
+                h4 span{
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        ion-row:nth-child(1){
+            background: var(--ion-color-violet-light);
+        }
+        ion-row:nth-child(2){
+            background: var(--ion-color-green-soft);
+        }
+        ion-row:nth-child(3){
+            background: var(--ion-color-blue-medium);
+        }
+        ion-row:nth-child(4){
+            background: var(--ion-color-blue-sky);
+        }
+    }
+}

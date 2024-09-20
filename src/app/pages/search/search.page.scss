@@ -1,0 +1,97 @@
+ion-title {
+    font-size: 0.9rem;
+    font-family: "Urbanist-Bold";
+}
+
+.bloc-gender {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 87px;
+    width: 180px;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+    margin: auto;
+    margin-bottom: 30px;
+
+    ion-icon {
+        font-size: 1rem;
+    }
+}
+
+.text-style {
+    font-size: 10px;
+}
+
+.input-style {
+    background-color: var(--ion-color-grislight);
+    margin: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+}
+
+.city-style {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 10px;
+}
+
+.discipline-style {
+    border-radius: 10px;
+    padding-left: 2.9rem;
+    padding-right: 2.9rem;
+}
+
+
+.discipline-div-style {
+    border-radius: 10px;
+    background: var(--ion-color-grislight);
+    padding-left: 1rem;
+}
+
+.bloc-btn{
+    margin-top: 3.5rem;
+}
+
+ion-input {
+
+    input::placeholder {
+        color: #707070;
+        font-size: 13px;
+        font-family: "Urbanist-Bold";
+    }
+}
+
+ion-input {
+    &.custom-input {
+        font-size: 13px; //sets text font size
+        color: #707070;
+        font-family: "Urbanist-Bold";
+
+        ::placeholder {
+            font-size: 13px; //sets placeholder font size
+        }
+    }
+}
+
+
+
+ion-textarea {
+    font-family: "Urbanist-Bold";
+}
+
+ion-select::part(placeholder) {
+    color: #707070;
+    font-size: 13px;
+    font-family: "Urbanist-Bold";
+}
+
+ion-select::part(icon) {
+    padding-left: 5rem;
+}
+
+.ion-padding {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+

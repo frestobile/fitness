@@ -1,0 +1,74 @@
+<ion-card>
+  <ion-item lines="none">
+    <ion-avatar slot="start" (click)="onViewCoach(coach)">
+      <img [src]="imageDefaultCoach" />
+    </ion-avatar>
+    <ion-label>
+      <h2>Armonie</h2>
+      <p>BodyBuilding</p>
+      <bar-rating class="rating" [rate]="4" [readOnly]="true" [max]="5" [theme]="'stars'">
+      </bar-rating>
+    </ion-label>
+    <ion-button slot="end" (click)="onViewCoach(coach)" fill="clear" mode="ios" color="medium">
+      <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item class="bloc-description" lines="none">
+    <ion-label>
+      <h3>Que du Ouf ce matin</h3>
+      <p>Merci à mon gars sur Franck pour le soutien</p>
+    </ion-label>
+  </ion-item>
+  <ion-grid class="bloc-resume">
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-text>Distance</ion-text>
+          <h4>13.86 Km</h4>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-text>Kcal</ion-text>
+          <h4>100 Kcal</h4>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-text>Temps</ion-text>
+          <h4>59 min 2s</h4>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <img class="bloc-img" [src]="defaultBg" />
+  <div class="followers">
+    <div class="bloc-persons">
+      <img src="assets/imgs/sample/p1.png" alt="P1" />
+      <img src="assets/imgs/sample/p2.png" alt="P1" />
+      <img src="assets/imgs/sample/p3.png" alt="P1" />
+    </div>
+    <div class="txt-follower">Vous et 13 autres personnes avez aimés ce post</div>
+  </div>
+
+  <ion-grid class="bloc-buttons">
+    <ion-row>
+      <ion-col size="3">
+        <ion-button size="small" fill="clear" mode="ios" color="medium">
+          <ion-icon slot="start" src="assets/imgs/icons/svg/clap.svg"></ion-icon> Cheers
+        </ion-button>
+      </ion-col>
+      <ion-col size="5">
+        <ion-button size="small" fill="clear" mode="ios" color="medium" >
+          <ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon> Commenter
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button size="small" fill="clear" mode="ios" color="medium">
+          <ion-icon slot="start" name="arrow-redo"></ion-icon> Partager
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+
+</ion-card>

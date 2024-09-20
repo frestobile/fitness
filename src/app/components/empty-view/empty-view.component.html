@@ -1,0 +1,7 @@
+<div class="bloc-empty ion-padding ion-text-center">
+  <img *ngIf="showImage" src="{{image}}" />
+  <h3>{{message.text}}</h3>
+  <p *ngIf="isButton">Une erreur est survenu. Résessayer</p>
+
+  <ion-button *ngIf="isButton" (click)="onEvent('onClick')" color="primary" mode="ios" expand="block" >{{message.txtButton}}</ion-button>
+</div>

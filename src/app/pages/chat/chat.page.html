@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img [src]="imageGroupe" alt="Lock" />
+        </ion-avatar>
+        <ion-label *ngIf="is_channel; else partnerChat">
+          <h2>{{current_channel?.name}}</h2>
+          <!-- <p>{{current_channel?.channel_partner_ids.length}} membre(s) </p> -->
+        </ion-label>
+        <ng-template #partnerChat>
+          <ion-label>
+            <h2>{{partner?.username}}</h2>
+          </ion-label>
+        </ng-template>
+      </ion-item>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="is_channel" (click)="presentPopover($event)" fill="clear">
+        <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover [isOpen]="isPop" (didDismiss)="isPop = false">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <ion-item (click)="showGroupe()">
+            <ion-label> {{ !real_chat ? 'Infos du groupe':'Infos sur '+current_channel?.name}}</ion-label>
+          </ion-item>
+          <ion-item (click)="closeDiscussion()">
+            <ion-label>Fermer la discussion</ion-label>
+          </ion-item>
+          <ion-item *ngIf="real_chat==null" (click)="leaveGroup()">
+            <ion-label>Quitter le groupe</ion-label>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content class="bg_chat">
+  <div>
+    <p *ngIf="is_pending" class="ion-text-center ion-padding"><ion-spinner name="dots"></ion-spinner></p>
+    <div *ngIf="!is_pending">
+      <div *ngIf="messages.length!=0">
+        <div class="bloc_group" *ngFor="let obj of group_messages; let last = last">
+          <ion-item-divider class="ion-text-center"> <ion-chip color="medium">{{obj.date | date:'mediumDate':'':lang}}</ion-chip></ion-item-divider>
+          <ion-item *ngFor="let m of obj.elements" lines="none" color="transparent">
+              <div class="chat-message">
+                <div [class]="m.author_id == current_user.id ? 'right-bubble' : 'left-bubble'">
+                  <span class="msg-name">{{m.author_id == current_user.id ? current_user.username : partner?.username}}. </span>
+                  <p [innerHTML]="m.body"></p>
+                  <span class="msg-date">{{m.created_at| date:'HH:mm':'':lang}}</span>
+                  <!-- <p *ngIf="m.model!='mail.channel' && m.model!=''" class="record_name">{{m.record_name}}</p> -->
+
+                </div>
+              </div>
+          </ion-item>
+        </div>
+      </div>
+      <app-empty-view *ngIf="messages.length==0" [message]="objMessage" ></app-empty-view>
+
+    </div>
+  </div>
+
+  <!-- Show Group -->
+  <ion-modal #modal [isOpen]="is_infos" (didDismiss)="is_infos = false">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="onCloseInfos()" fill="clear">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content color="gray">
+        <div class="bloc-image ion-text-center">
+          <ion-avatar>
+            <img [src]="imageGroupe" alt="Lock" />
+          </ion-avatar>
+          <h3>{{current_channel?.name}}</h3>
+          <p>Groupe {{current_channel.public=="private" ? "privée":"publique"}} &bull; {{current_channel?.channel_partner_ids.length}} membre(s)</p>
+        </div>
+
+        <ion-list class="list_member">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <p>{{current_channel?.description}} </p>
+              <ion-text></ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="list_member">
+          <ion-list-header>
+            <ion-label><h3>{{current_channel?.channel_partner_ids.length}} membre(s)</h3></ion-label>
+          </ion-list-header>
+          <ion-item *ngFor="let obj of members | slice:0:10">
+            <ion-avatar slot="start">
+              <img [src]="getImage(obj.background_image)" alt="{{obj.username}}" />
+            </ion-avatar>
+            <ion-label>
+              <h2> {{obj.first_name}} {{obj.last_name}} </h2>
+              <p>{{obj.sporting_level}} </p>
+            </ion-label>
+          </ion-item>
+
+          <div class="ion-padding-top ion-text-center" *ngIf="members.length>10" >
+            <ion-button (click)="seeAll()" mode="ios" color="primary" expand="block" fill="clear" [strong]="true">
+              Voir tous les membres <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-list>
+
+        <ion-list class="list_member">
+          <ion-item lines="none" (click)="presentAlertConfirm()">
+            <ion-icon slot="start" color="rouge" name="log-out-outline"></ion-icon>
+            <ion-label class="ion-text-wrap" color="rouge">
+              Quitter le groupe
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- End show group -->
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="10">
+          <ion-item lines="none" color="transparent">
+            <ion-input color="medium" label="" placeholder="Ecrire un message..." [(ngModel)]="txtMessage"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col class="ion-text-center" size="2" (click)="sendMessage()">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-footer>

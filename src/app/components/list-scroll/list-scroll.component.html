@@ -1,0 +1,15 @@
+<!-- <ion-picker-colum [name]="'JavaScript'"></ion-picker-colum>
+<ion-picker-column class="sc-ion-picker-ios ios picker-col hydrated">
+  <div class="picker-opts">
+    <button class="picker-opt picker-opt-selected" opt-index="0" style="transform: rotateX(0deg) translate3d(0px, 0px, 90px);">JavaScript</button>
+    <button class="picker-opt" opt-index="1" style="transform: rotateX(-21.16deg) translate3d(0px, 0px, 90px);">TypeScript</button>
+    <button class="picker-opt" opt-index="2" style="transform: rotateX(-42.32deg) translate3d(0px, 0px, 90px);">Rust</button>
+    <button class="picker-opt" opt-index="3" style="transform: rotateX(-63.48deg) translate3d(0px, 0px, 90px);">C#</button>
+</div>
+</ion-picker-column> -->
+
+<swiper-container #poidsSlider [slidesPerView]="6" (afterinit)="swiperPoidsReady()" (slidechange)="handlePoidschanged($event)">
+  <swiper-slide *ngFor="let obj of arrayRange(30,110,1)">
+    <h1 class="ion-text-center">{{obj}}</h1>   
+  </swiper-slide>
+</swiper-container> 

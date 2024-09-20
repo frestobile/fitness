@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()"  class="mt-0">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ session.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="light">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="boot-image">
+    <img [src]="getImage(session)" alt="Session" />
+  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center bloc-level">
+      <ion-col size="8"><ion-label class="padding-label-blue" color="light">{{ session.sporting_level }}</ion-label> </ion-col>
+      <ion-col size="4" class="ion-text-right"><ion-text color="primary">{{schedules.length}} exercices</ion-text> </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <h5 class="text-primary">Quel est votre but ?</h5>
+      </ion-col>
+      <ion-col >
+        <div [innerHTML]="session.description" class="description"> </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list class="exercise-form mt-8 mb-4">
+    <ion-label class="exercise-title">Exercises</ion-label>
+    <ion-item lines="none" class="mt-4" *ngFor="let e_schedule of schedules" (click)="gotoExceriseDetail(e_schedule)">
+      <ion-label>
+        <span>{{ e_schedule.exercise.title }}</span>
+        <span>{{ e_schedule.reps }} séries</span>
+        <span>{{ e_schedule.time }} min</span>
+        <span>{{ e_schedule.rest }} min</span>
+        <span>{{ e_schedule.weight }} kg</span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list >
+    <div class="discipline custom-form">
+      <ion-item lines="none">
+        <ion-select label="statut de la session en cours ?" cancelText="Annuler" [interfaceOptions]="customActionSheetOptions" (ionChange)="selectStatusType($event)" interface="action-sheet" label-placement="floating" [(ngModel)]="selected_status" >
+          <ion-select-option *ngFor="let obj of status_types" value="{{obj.id}}">{{obj.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button *ngIf="status_changed"  mode="ios" color="primary" class="mt-4" (click)="updateSessionScheduleStatus()"  >Sauvegarder</ion-button>
+    </div>
+  </ion-list>
+</ion-content>

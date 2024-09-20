@@ -1,0 +1,67 @@
+ion-grid ion-row{
+    margin-top: 15px;
+    p{
+        color: var(--ion-color-medium);
+        text-align: justify;
+    }
+
+    p, ion-text{
+        font-weight: bold;
+    }
+}
+
+.boot-image img{
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.description {
+    background-color: #F2F2F2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    line-height: 1.4;
+}
+
+.count-input {
+    background-color: #F2F2F2;
+    border-radius: 1rem;
+    padding: 20px 10px;
+    width: 65px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+}
+
+.price-group {
+    float: right;
+    label {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    h4 {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px 20px;
+        background-color: #F2F2F2;
+        border-radius: 1rem;
+        margin: 0;
+    }
+}
+
+ion-modal#success-modal {
+    --width: fit-content;
+    --min-width: 260px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+    .modal-content {
+        width: 260px;
+        padding: 20px;
+        h1 {
+            text-align: center;
+        }
+    }
+}

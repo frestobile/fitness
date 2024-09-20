@@ -1,0 +1,131 @@
+@import "../walkthrough/walkthrough.page.scss";
+
+.btn-skip{
+    right: auto;
+    left: 10px;
+}
+
+.btn-skip2{
+    right: 10px;
+    left: auto;
+}
+
+.custom-slider{
+    margin-top: 70px;
+    h3{
+        font-size: 1.25rem;
+        margin-top: 0;
+    }
+
+    ion-datetime::part(wheel-item) {
+        font-size: 1.25rem;
+        font-family: "Urbanist-Bold";
+    }
+}
+
+.custom-person{
+    margin-top: 2.5rem;
+}
+
+.bloc-gender{
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 120px;
+    width: 120px;
+    padding-top: 30px;
+    margin: auto;
+    margin-bottom: 30px;
+    ion-text{
+        font-size: 0.8rem;
+    }
+}
+
+.custom-type{
+    margin-top: 9vh;
+}
+
+.custom-poids{
+    width: 230px;
+    margin: auto;
+    margin-bottom: 10vh;
+    margin-top: 7rem;
+    border: 3px solid var(--ion-color-grislight);
+    border-radius: 3.90rem;
+    ion-input{
+        font-size: 4.5rem;
+        font-family: 'Urbanist-Regular';
+        --color: var(--ion-color-primary);
+        --placeholder-color: var(--ion-color-grislight);
+    }
+}
+
+.custom-mic{
+    h3,h4{
+        color: var(--ion-color-light);
+    }
+}
+
+.bottom-icon{
+    margin-top: 15vh;
+    ion-icon{
+        font-size: 17rem;
+    }
+}
+
+.btn-finish{
+    width: 85%;
+    right: 1.4rem;
+}
+
+.preferences-slider{
+    &::part(pagination){
+        top: 9rem;
+        width: 90%;
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+        background: var(--ion-color-blue-light);
+    }
+}
+
+.custom-regime{
+    margin-top: 11rem;
+    ion-button{
+        margin-right: 20px;
+    }
+    .bottom-img{
+        margin-top: 5rem;
+    }
+}
+
+.bloc-goals{
+    ion-item{
+        margin-bottom: 15px;
+        border-radius: 0.72rem;
+        ion-label h3{
+            color:var(--ion-color-gray-2);
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.discipline{
+    ion-item{
+        border: none;
+        padding: 15px;
+    }
+}
+
+.custom-sport{
+    width: auto;
+    border: none;
+    ion-col{
+        text-align: center;
+        ion-text{
+            font-family: 'Urbanist-Bold';
+            color: var(--ion-color-gray-2);
+        }
+/*         ion-input {
+            --border-radius: 0.75rem;
+        } */
+    }
+}

@@ -1,0 +1,13 @@
+@import "../coach/coach.component.scss";
+
+ion-card{
+    .bloc-img{
+        height: 120px;
+    }
+}
+
+.bloc-stars{
+    ion-icon{
+        font-size: 0.8rem;
+    }
+}

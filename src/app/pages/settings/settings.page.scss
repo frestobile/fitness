@@ -1,0 +1,13 @@
+ion-list{
+    margin-bottom: 10px;
+        
+    ion-item{
+        ion-label{
+            font-family: "Urbanist-Bold";
+            p{
+                font-family: "Urbanist-Bold";
+                color: var(--ion-color-medium);
+            }
+        }
+    }
+}

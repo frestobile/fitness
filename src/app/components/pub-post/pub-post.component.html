@@ -1,0 +1,32 @@
+<ion-card >
+  <ion-item lines="none">
+    <ion-avatar slot="start" (click)="onViewCoach(coach)">
+      <img [src]="imageDefaultCoach" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{coach.display_name}}</h2>
+      <p>BodyBuilding &bullet; Sponsorisé</p>
+      <div class="bloc-stars">
+        <ion-icon *ngFor="let item of [1,2,3,4,5]" name="star-outline"></ion-icon>
+        <!-- <ion-icon name="star-outline"></ion-icon>
+        <ion-icon name="star-outline"></ion-icon> -->
+        <!-- <bar-rating class="rating" [rate]="4" [readOnly]="true" [max]="5" [theme]="'stars'">
+        </bar-rating> -->
+      </div>
+    </ion-label>
+    <ion-button [disabled]="isSubscription(coach.id)" slot="end" (click)="onViewCoach(coach)" fill="outline" mode="ios" color="primary">
+      {{ isSubscription(coach.id) ? 'Supporter': 'Suivre'}}
+    </ion-button>
+  </ion-item>
+  <img class="bloc-img" height="120px" [src]="defaultBg" /> 
+  <div>
+    <ion-item lines="none">
+      <ion-label>
+        <ion-button color="rouge"  fill="clear"><ion-icon slot="start" name="heart-outline"></ion-icon> 123 </ion-button>
+        <ion-button color="dark"  fill="clear"><ion-icon slot="start" name="eye-outline"></ion-icon> 223 </ion-button>
+      </ion-label>
+      <ion-button mode="ios" slot="end" color="dark"  fill="clear"><ion-icon slot="start" name="location-outline"></ion-icon> à 3Km </ion-button>
+    </ion-item>
+  </div>
+
+</ion-card>

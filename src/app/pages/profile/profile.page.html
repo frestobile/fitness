@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Remplissez votre profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="login-logo ion-text-center">
+    <!-- <img src="{{imgLogo}}" alt="Fitness Profile" /> -->
+    <ion-icon color="primary" name="person"></ion-icon>
+  </div>
+  <ion-icon color="dark" (click)="updatePhoto()" class="icon-camera" name="add-circle"></ion-icon>
+
+  <ion-list *ngIf="current_user" class="custom-form ion-margin-top">
+    
+    <!-- <ion-label color="primary">Nom</ion-label> -->
+    <ion-item lines="none">
+      <ion-input type="text" placeholder="Prénom(s) et Nom(s)" [(ngModel)]="current_user.last_name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text" placeholder="Nom utilisateur" [(ngModel)]="current_user.first_name"></ion-input>
+    </ion-item>
+
+    <!-- <ion-label color="primary">Profession</ion-label>
+    <ion-item lines="none">
+      <ion-input type="text" [(ngModel)]="current_user.function"></ion-input>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-input type="text"  placeholder="Ville" [(ngModel)]="current_user.city"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text"  placeholder="Emploi" [(ngModel)]="current_user.job"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none">
+      
+      <span class="fi fi-{{selectedCode.flagClass}}" slot="start" (click)="openCountries()"> </span>
+      <ion-intl-tel-input [defaultCountryiso]="selectedCode.isoCode" [(ngModel)]="current_user.phone_number"></ion-intl-tel-input>
+    </ion-item>
+    
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="6" size-xl="6">
+        <ion-button mode="ios" shape="round" [strong]="true" [disabled]="is_pending" (click)="onUpdate()" expand="block">Enregistrer <ion-spinner *ngIf="is_pending" color="light"></ion-spinner></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <!-- ENd of update user-->
+
+  <ion-popover #popover [isOpen]="isPopoverOpen" [backdropDismiss]="false" alignment="center" (didDismiss)="handleClosePop($event)">
+    <ng-template>
+      <ion-content class="ion-padding ion-text-center custom-pop" color="gray-bold">
+        <div class="bloc-success ion-text-center">
+          <ion-icon class="btn_success" src="assets/imgs/pop/success.svg"></ion-icon>
+          <ion-icon class="btn_checkbox" src="assets/imgs/pop/check_box.svg"></ion-icon>
+        </div>
+        <ion-label color="primary"><h3>Félicitations !</h3></ion-label> 
+        <p>votre compte est prêt à être utilisé</p>
+
+        <ion-button (click)="goToHome()" [strong]="true" shape="round" expand="block" mode="ios" color="primary">Suivant</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+
+    <!-- Countries -->
+    <ion-modal #modalCountry [isOpen]="is_country" (didDismiss)="handleCloseCountry($event)">
+      <ng-template>
+        <ion-header class="ion-no-border">
+          <ion-toolbar>
+            <ion-title>
+              <ion-searchbar mode="ios" [(ngModel)]="txt_search" (ionInput)="getItems($event)" placeholder="Rechercher un pays"></ion-searchbar>
+            </ion-title>
+            <ion-buttons slot="end">
+              <ion-button >
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <!-- <ion-list-header>Select a country</ion-list-header> -->
+            <ion-item *ngFor="let obj of list_countries">
+              <ion-label>{{obj.name}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+</ion-content>
+

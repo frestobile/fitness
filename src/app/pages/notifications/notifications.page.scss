@@ -1,0 +1,14 @@
+.notification-content{
+    p {
+        font-size: 12px;
+        font-family: "Urbanist-Bold";
+        color: #000;
+        &.active {
+            color: #007FFF;
+        }
+    }
+}
+
+ion-note {
+    font-size: 10px;
+}

@@ -1,0 +1,310 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-item class="bloc-profile" lines="none">
+      <!-- <ion-avatar slot="start">
+        <img src="assets/imgs/default-avatar.jpg" />
+      </ion-avatar> -->
+      <ion-label *ngIf="current_user" color="primary">
+        <h3>Hi {{current_user.first_name | titlecase }} {{current_user.last_name | titlecase }} </h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+          <span class="badge" *ngIf="current_user.notifications > 0">{{ current_user.notifications }}</span>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+<!--         <ion-item class="bloc-profile" lines="none">
+          <ion-label *ngIf="current_user" color="primary">
+            <h3>Hi {{current_user.firstname | titlecase }} {{current_user.lastname | titlecase }} </h3>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button fill="clear">
+              <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear">
+              <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item> -->
+      </ion-col>
+    </ion-row>
+    <ion-row class="bloc-fitness" [ngStyle]="{'background-image': 'url(' + bg_calorie + ')'}" (click)="is_blue=true;">
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="walk-outline"></ion-icon><br>
+        <h4>0</h4>
+        <ion-text>SEANCES</ion-text>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="flag-outline"></ion-icon><br>
+        <h4>0</h4>
+        <ion-text>KM</ion-text>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="flame-outline"></ion-icon><br>
+        <h4>0</h4>
+        <ion-text>KCAL</ion-text>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="alarm-outline"></ion-icon><br>
+        <h4>0</h4>
+        <ion-text>MINUTES</ion-text>
+      </ion-col>
+      <div class="btn-level">
+        <span>Niveau </span> <ion-text color="success" mode="ios">{{current_niveau?.name}}</ion-text>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Subscriber -->
+  <ion-segment [(ngModel)]="home_selected" class="bloc-segment">
+    <ion-segment-button value="news">
+      <ion-label>Fil d'actualité</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="groupe">
+      <ion-label>Groupe</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="true" value="challenges">
+      <ion-label>Challenge</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="home_selected">
+    <div *ngSwitchCase="'news'" class="bg_gray">
+      <div class="subscribers">
+        <!-- <h4>Mes Coachs</h4> -->
+        <swiper-container slides-per-view="4.25" class="scrollmenu" *ngIf="current_user.role=='client'">
+          <swiper-slide class="bloc_coach">
+            <ion-icon name="add-circle" color="grislight" (click)="addCoach()" class="icon-add-post"></ion-icon>   
+          </swiper-slide>
+          <swiper-slide class="bloc_coach" *ngFor="let obj of abonnes">
+            <ion-avatar class=" custom-capture" (click)="goToCoachProfile(obj)">
+              <ion-img [src]="obj.profile_image"></ion-img>   
+              <span class="badge"></span>
+            </ion-avatar>
+            <!-- <ion-text color="medium">Coach Duvall</ion-text> -->
+          </swiper-slide>
+        </swiper-container>
+        <swiper-container slides-per-view="4.25" class="scrollmenu" *ngIf="current_user.role=='coach'">
+          <swiper-slide class="bloc_coach">
+            <ion-icon name="add-circle" color="grislight" (click)="addCoach()" class="icon-add-post"></ion-icon>   
+          </swiper-slide>
+        </swiper-container>
+      </div>
+      <!-- Block Follow coach -->
+      <app-empty-list *ngIf="pub_coachs.length==0"></app-empty-list>
+      <div class="subscribers" *ngIf="pub_coachs.length!=0">
+        <!-- <h4 class="title-follow">Coachs</h4> -->
+        <div *ngFor="let item of coachs_to_follow; let i = index;">
+          <app-coach *ngIf="i%5!=0" [coach]="temp"  
+            (followCoach)="handleProfile($event)"
+            (viewCoach)="showProfileUser($event)"
+            >
+          </app-coach>
+          <app-pub-post *ngIf="i!=0 && i%5==0" [coach]="pub_coachs[i%pub_coachs.length]" [partner]="current_user" 
+            (followCoach)="handleCoach($event)"
+            (viewCoach)="showProfileCoach($event)"
+          >
+          </app-pub-post>
+        </div>
+      </div>  
+      <!-- End of block follow coach -->  
+    </div>
+    <div *ngSwitchCase="'groupe'" class="bg_gray">
+      <ion-list class="bg_empty" *ngIf="channels_public.length!=0">
+        <ion-list-header>
+          <ion-label color="primary"><h3>Groupe fitness par défaut</h3> </ion-label>
+          <ion-button (click)="onAddGroup('private')" fill="clear" size="small" color="medium" mode="ios" [strong]="true"><ion-icon slot="start" name="add"></ion-icon> Créer</ion-button>
+        </ion-list-header>
+        <app-chatgroup *ngFor="let item of channels_public" 
+        [current_user]="current_user" 
+        [groupe]="item"
+        [lang]="lang"
+        (goToChat)="goToChat(item)"  
+        (joinToGroup)="joinGroup(item)"
+        >
+      </app-chatgroup>
+      </ion-list>
+      <ion-list class="bg_empty" *ngIf="mychannels.length!=0">
+        <ion-list-header>
+          <ion-label color="primary"><h3>Récemment crées</h3> </ion-label>
+        </ion-list-header>
+        <app-chatgroup *ngFor="let item of mychannels" 
+        [current_user]="current_user" 
+        [groupe]="item"
+        [lang]="lang"
+        (goToChat)="goToChat(item)"  
+        (joinToGroup)="joinGroup(item)"
+        >
+      </app-chatgroup>
+      </ion-list>
+
+      <app-empty-view *ngIf="channels_public.length==0" [showImage]="false" [message]="obj_message"></app-empty-view>
+    </div>
+    <div *ngSwitchCase="'challenges'" class="bg_gray">
+    </div>
+  </div>
+ 
+  <!-- End of Subscriber --> 
+  
+  <!-- Challenges -->
+  <!-- <div class="subscribers">
+    <h4>Défis</h4>
+    <swiper-container slides-per-view="2.25" class="defis_color">
+      <swiper-slide class="bloc_coach defis" *ngFor="let obj of challenges; let i = index;">
+        <p>Défi {{i+1}} </p>
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-text-center">
+            <ion-icon name="flame-outline"></ion-icon> <span>0</span> <br>
+            <ion-text>Kcal</ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="alarm-outline"></ion-icon> <span>0</span> <br>
+            <ion-text>Minutes</ion-text>
+          </ion-col>
+        </ion-row>
+      </swiper-slide>
+    </swiper-container>
+  </div>  -->
+  <!-- End of Challenges-->
+  
+  <!-- Bloc blue details -->
+  <ion-modal #bleu [isOpen]="is_blue">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="transparent">
+          <ion-buttons slot="start">
+            <ion-button fill="clear" color="light" (click)="onClose()">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>            
+            </ion-button>
+          </ion-buttons>
+          <ion-title></ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="bg_carte ion-padding">
+          <ion-grid>
+            <ion-row class="bloc-fitness">
+              <ion-col class="ion-text-center" size="3">
+                <ion-icon name="walk-outline"></ion-icon><br>
+                <h4>0</h4>
+                <ion-text>SEANCES</ion-text>
+              </ion-col>
+              <ion-col class="ion-text-center" size="3">
+                <ion-icon name="flag-outline"></ion-icon><br>
+                <h4>0</h4>
+                <ion-text>KM</ion-text>
+              </ion-col>
+              <ion-col class="ion-text-center" size="3">
+                <ion-icon name="flame-outline"></ion-icon><br>
+                <h4>0</h4>
+                <ion-text>KCAL</ion-text>
+              </ion-col>
+              <ion-col class="ion-text-center" size="3">
+                <ion-icon name="alarm-outline"></ion-icon><br>
+                <h4>0</h4>
+                <ion-text>MINUTES</ion-text>
+              </ion-col>
+              <div class="btn-level">
+                <span>Niveau </span> <ion-text color="success" mode="ios">{{current_niveau?.name}}</ion-text>
+              </div>
+            </ion-row>
+          </ion-grid>
+          <div class="bloc-blue">
+            <ion-card class="bloc-musculation">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-item lines="none" color="transparent">
+                    <ion-icon slot="start" name="barbell-outline"></ion-icon>
+                    <ion-label><h1>Musculation</h1></ion-label>
+                  </ion-item>
+                
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>NOMBRE DE SERIES</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>NOMBRE DE REPETITIONS</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>TOTAL DES CHARGES PORTEES</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>MOYENNE DES CHARGES</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card class="bloc-cardio">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-item lines="none" color="transparent">
+                    <!-- <ion-avatar slot="start">
+                      <ion-img src="assets/imgs/parade.png"></ion-img>
+                    </ion-avatar> -->
+                    <ion-icon slot="start" name="bicycle-outline"></ion-icon>
+                    <ion-label><h1>Cardio</h1></ion-label>
+                  </ion-item>
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>KILOMETRES</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>TEMPS MOYEN DE MARCHE</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>TEMPS TOTAL DE MARCHE</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                  <ion-label>VITESSE MOYENNE</ion-label>
+                  <h4 slot="end">0</h4>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- ENd of details-->
+
+  <ion-modal #modalChannel [isOpen]="is_channel" [breakpoints]="[0.25, 0.5, 0.75]" [initialBreakpoint]="0.75" (didDismiss)="handleChannel($event)">
+    <ng-template>
+      <ion-content class="ion-padding"> 
+        <ion-list class="bloc-form">
+          <ion-list-header><ion-label color="medium"><h2>Créer un groupe <ion-text>{{channel_type=='private' ? 'privée':'publique'}} </ion-text> </h2></ion-label> </ion-list-header>
+          <div class="ion-margin-bottom ion-margin-top">
+            <ion-input label-placement="stacked" placeholder="Nom du groupe" fill="outline" [(ngModel)]="objChannel.name" ></ion-input>
+          </div>
+          <div class="ion-margin-bottom ion-margin-top">
+            <ion-textarea rows="4" labelPlacement="stacked" fill="outline" [(ngModel)]="objChannel.description" placeholder="décrivez les sujets discutés dans ce groupe"></ion-textarea>
+          </div>
+
+          <div class="ion-padding-top">
+            <ion-button [disabled]="is_created" expand="block" color="primary" (click)="registerChannel()" mode="ios">Créer <ion-spinner *ngIf="is_created" name="dots"></ion-spinner> </ion-button>
+          </div>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="blue-light">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Recherche coach / partenaire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="blue-light" [fullscreen]="true" class="wrapper">
+  <div style="padding-left: 4rem; padding-right:4rem;padding-top:3em;">
+    <swiper-container slides-per-view="3">
+      <swiper-slide class="bloc-slide bloc-gender" *ngFor="let obj of genders;let i = index;"
+        [ngStyle]="{'background-image': !obj.checked ? 'url(' + obj.bg + '.png)': 'url(' + obj.bg + '_selected.png)'}"
+        (click)="selectGender(obj, i)">
+        <div class="div-style">
+          <img height="32px" [src]="obj.checked ? obj.icon_s: obj.icon" alt="ou" />
+          <ion-text class="text-style" [color]="obj.checked ? 'light':'medium'">{{obj.name}}</ion-text>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <div class="city-style">
+    <div class="input-style"><ion-input #input (ionInput)="inputChange($event)" class="custom-input" type="text"
+        placeholder="Ville"></ion-input></div>
+  </div>
+
+
+  <div class="discipline-style">
+    <div class="discipline-div-style">
+        <ion-select aria-label="Discipline" [compareWith]="compareWith" placeholder="Dans quelle discipline ?"
+          (ionChange)="handleChange($event)" [multiple]="true" justify="space-between" toggleIcon="caret-down-sharp">
+          <ion-select-option *ngFor="let discpline of disciplines" [value]="discpline">{{ discpline.name }}</ion-select-option>
+        </ion-select>
+    </div>
+  </div>
+  <br>
+  <div class="discipline-style">
+    <ion-list lines="none" class="discipline-div-style">
+      <ion-textarea [autoGrow]="true" rows="5" class="custom-input"
+        placeholder="Message"></ion-textarea>
+    </ion-list>
+  </div>
+
+  <div class="ion-padding bloc-btn">
+    <ion-button shape="round" mode="ios" expand="block" (click)="goToPage('programme-result')">Rechercher</ion-button> 
+  </div>
+
+
+</ion-content>

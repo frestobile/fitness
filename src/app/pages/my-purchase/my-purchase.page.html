@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mes achats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="bloc-menus">
+    <ion-item lines="none" color="{{tab_colors[0]}}" (click)="goToDetails('session')">
+      <ion-label class="text-book">
+        <h2>
+          Séances
+        </h2>
+        <ion-icon name="accessibility-outline"></ion-icon>
+      </ion-label>
+      <span class="badge" *ngIf="sessionsCount > 0"></span>
+    </ion-item>
+    <ion-item lines="none" color="{{tab_colors[2]}}" (click)="goToDetails('program')">
+      <ion-label class="text-book">
+        <h2 class="">
+          Programmes
+        </h2>
+        <ion-icon slot="start" name="barbell-outline"></ion-icon>
+      </ion-label>
+      <span class="badge" *ngIf="programsCount > 0"></span>
+    </ion-item>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+@import "../adverts/adverts.page.scss";
+
+.custom-form{
+
+    ion-radio-group{
+        
+        ion-item{
+            margin-bottom: 0;
+            border-radius: 0;
+            --color: var(--ion-color-medium);
+            ion-radio{
+                font-weight: 700;
+            }
+        }
+        ion-item:first-child{
+            border-top-right-radius: 0.6em;
+            border-top-left-radius: 0.6em;
+        }
+
+        ion-item:last-child{
+            border-bottom-right-radius: 0.6em;
+            border-bottom-left-radius: 0.6em;
+        }
+    }
+
+    .inPrix{
+        margin-top: 1.5em;
+    }
+}
+
+
+ion-textarea{
+    background: none;
+    border: none;
+}
+
+.bloc-img{
+    padding: 0;
+    background-color: #9ecefe8c;
+    .empty-img{
+        padding: 15px;
+    }
+}
+
+.list-boot{
+    ion-item{
+        p, ion-text{
+            font-weight: 800;
+        }
+        ion-img{
+            border-radius: 0.6em;
+        }
+    }
+}
+
+.add-circle-icon {
+    background: #007FFF;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.delete-circle-icon {
+    padding: 5px;
+    font-size: 1rem;
+    color: var(--ion-color-danger);
+}
+
+.exercise-form {
+    ion-item {
+        border-radius: 10px;
+        --background: #007FFF;
+        span {
+            color: #fff;
+            padding-right: 4px;
+            padding-left: 4px;
+            border-right: solid 2px #fff;
+        }
+    }
+}

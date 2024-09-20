@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="ion-padding ion-text-center bloc-loading">
+      <ion-icon color="danger" *ngIf="is_pending" name="hourglass-outline"></ion-icon>
+      <img *ngIf="!is_pending" src="assets/imgs/success.gif" alt="DOMSE" />
+      <h3>Synchronisation</h3>
+      <p *ngIf="is_pending">Nous préparons les éléments nécessaire afin que vous puissiez travailler</p>
+      <p *ngIf="!is_pending">Votre outil de travail est prêt. Touchez le bouton "Commencez la ronde"</p>
+      <div class="custom-progress">
+        <ion-text>{{progress | percent}} </ion-text>
+        <p *ngIf="is_pending"><ion-label color="medium">Veuillez patienter un moment...</ion-label></p>
+        <ion-progress-bar [value]="progress"></ion-progress-bar>
+      </div>
+      <ion-button *ngIf="!is_pending" mode="ios" (click)="goToHome()" expand="block">Commencez la ronde</ion-button>
+    </div>
+</ion-content>

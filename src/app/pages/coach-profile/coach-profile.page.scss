@@ -1,0 +1,73 @@
+@import "../statistics/statistics.page.scss";
+
+.bloc_user{
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 15px;
+    min-height: 220px;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    ion-title {
+      color: #fff;
+    }
+    ion-item{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        ion-avatar{
+            height: 84px;
+            width: 84px;
+            border: 2px solid var(--ion-color-light);
+        }
+        ion-label{
+            ion-grid{
+                ion-row {
+                    ion-col{
+                        ion-text{
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 1.4;
+                            // padding-bottom: 4px;
+                        }
+                        span{
+                            font-size: 13px;
+                            font-weight: 500;
+                        }
+                        ion-button {
+                            button {
+                                background-color: inherit;
+                                width: 30px;
+                                height: 30px;
+                            }
+                        }
+                    }
+                    hr {
+                        background-color: #fff;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        ion-icon {
+            font-size: 28px;
+        }
+    }
+
+    .btn-follow{
+        position: absolute;
+        right: 15px;
+    }
+
+}
+
+.bloc_coach{
+    div{
+        background: var(--ion-color-violet-light);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 0.8rem;
+        ion-label{
+            font-weight: 900;
+            font-size: 0.8rem;
+        }
+    }
+}

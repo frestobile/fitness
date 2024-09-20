@@ -1,0 +1,15 @@
+<ion-item (click)="onChatCoach(groupe)">
+  <ion-avatar slot="start">
+    <img [src]="groupe.is_private==0 ? imagePublic:imagePrivate" alt="Lock" />
+  </ion-avatar>
+  <ion-label>
+    <h2>{{groupe.name}}</h2>
+    <!-- <p>{{groupe.channel_partner_ids.length}} membre(s) </p>  --> 
+    <p>{{groupe.message_counts}} message(s)</p>
+  </ion-label>
+  <ion-note *ngIf="true" color="medium" slot="end">
+    {{groupe.created_at | date:'mediumDate':'':lang}} <br>
+    <ion-badge>{{groupe.unread_counts}}</ion-badge>
+  </ion-note>
+  <ion-button *ngIf="false" slot="end" mode="ios" color="primary" (click)="joinGroup(groupe)">Joindre</ion-button>
+</ion-item>

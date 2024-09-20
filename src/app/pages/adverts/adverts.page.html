@@ -1,0 +1,84 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Publicités</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-empty-list *ngIf="is_pending"></app-empty-list>
+
+  <div *ngIf="!is_pending">
+    <div *ngFor="let obj of pubs">
+      <app-pub
+        [pub]="obj"
+        [supplier]="is_supplier"
+        (showAdvert)="goToAdvert($event)">
+      </app-pub>
+    </div>
+
+    <app-empty-view *ngIf="!pubs.length"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+  </div>
+
+  <ion-fab *ngIf="is_supplier" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="postAdvert()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal #modal [isOpen]="is_opened" (didDismiss)="handleAdvert($event)">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Formulaire publicité</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="onClose()" fill="clear">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-card class="bloc-img">
+          <div *ngIf="!isUploaded" class="ion-padding ion-text-center">
+            <ion-icon name="image-outline"></ion-icon> <br>
+            <ion-note>Ajouter une bannière publicitaire</ion-note>
+          </div>
+        </ion-card>
+
+        <ion-list class="custom-form">
+          
+          <ion-item lines="none">
+            <ion-input type="date" [min]="current_date" label="Date de début" labelPlacement="stacked" [(ngModel)]="obj_pub.date_start"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="obj_pub.date_start" lines="none">
+            <ion-input type="date" [min]="obj_pub.date_start" (ionChange)="handleDateChanged($event)" label="Date de fin" labelPlacement="stacked" [(ngModel)]="obj_pub.date"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="false" lines="none">
+            <ion-input type="number" label="Montant à payer" labelPlacement="stacked" [(ngModel)]="obj_pub.amount" [readonly]="true"></ion-input>
+          </ion-item>
+          
+          <div class="ion-margin-top ion-margin-bottom">
+            <ion-card class="resume-pub" color="vert" *ngIf="package">
+              <ion-card-content>
+                <ion-label>
+                  La durée de la publicité : <strong>{{obj_pub.duration_days}} jour(s)</strong> <br> 
+                  Montant à payer : <strong>{{ obj_pub.amount | currency:package.currency_id.name:'symbol':'1.0-0':lang }} </strong>
+                </ion-label> 
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-list>
+        <div class="ion-margin-top">
+          <ion-button mode="ios" [strong]="true" (click)="handlePayment()" expand="block" color="primary" shape="round">
+            Soumettre
+          </ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

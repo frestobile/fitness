@@ -1,0 +1,13 @@
+@import "../pub/pub.component.scss";
+
+ion-row{
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 0.70rem;
+    margin-bottom: 10px;
+
+    ion-col:first-child{
+        strong{
+            color: var(--ion-color-medium);
+        }
+    }
+}

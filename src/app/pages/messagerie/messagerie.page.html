@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar>
+    <ion-title>Messagerie</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="is_pending">
+    <app-empty-list></app-empty-list>
+  </div>
+  <div *ngIf="!is_pending">
+    <ion-list>
+      <app-chatgroup *ngFor="let item of channels" 
+        [current_user]="current_user" 
+        [groupe]="item"
+        [lang]="lang"
+        (goToChat)="goToChat(item)"  
+        (joinToGroup)="joinGroup(item)"
+        >
+      </app-chatgroup>
+    </ion-list>
+
+    <app-empty-view *ngIf="channels.length==0" [message]="optionsMessage" > </app-empty-view> 
+  </div>
+</ion-content>

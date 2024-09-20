@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Notifications</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" class="mt-0">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="bloc-img ion-text-center">
+    <img src="assets/imgs/notification.png" alt="Success" />
+  </div>
+  <div class="bloc-content ion-text-center ion-margin-top">
+    <h3 class="my-4">{{ title }}</h3>
+    <p>{{ content }}</p>
+    <ion-button mode="ios" color="primary" (click)="goToPackageDetail()">Suivant</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,76 @@
+ion-title {
+    font-family: "Urbanist-Bold";
+}
+
+.card-number {
+    font-size: 1.4rem;
+    text-align: center;
+    color: white;
+}
+
+.text-content {
+    font-size: 0.7rem;
+    font-family: "Urbanist-Bold";
+}
+
+ion-card-content {
+    color: white;
+}
+
+.input-style {
+    background-color: #F1EFEF;
+    border-radius: 10px;
+    margin: auto 0;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+ion-input {
+    &.custom-input {
+        font-size: 1rem; //sets text font size
+        color: black;
+        font-family: "Urbanist-SemiBold";
+        margin: 1em;
+
+        ::placeholder {
+            font-size: 1rem;
+            color: black;
+        }
+    }
+}
+
+ion-input{
+    &.text-input{
+        font-size: 1rem; //sets text font size
+        color: black;
+        text-align: center;
+        font-family: "Urbanist-SemiBold";
+
+        ::placeholder {
+            font-size: 1rem;
+            color: black;
+        }
+     }
+}
+
+
+ion-input{
+    &.text-input-price{
+        font-size: 2rem; //sets text font size
+        color: black;
+        font-family: "Urbanist-Bold";
+        text-align: center;
+
+        ::placeholder {
+            font-size: 1rem;
+            color: black;
+        }
+     }
+}
+
+.btn-style{
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+}

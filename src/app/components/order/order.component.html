@@ -1,0 +1,13 @@
+<ion-row (click)="getProgram(program)" class="ion-align-items-center">
+  <ion-col size="9">
+    <ion-text color="medium">{{program.create_date | date:"mediumDate":"":lang}} &bull; <strong class="state">{{getNameOfLevel(program.sporting_level)}}</strong> </ion-text>
+    <p class="ion-text-wrap">{{program.program_id.name}} &bullet; <strong>{{program.session_line_ids.length}} / {{program.num_sessions}} séances</strong></p>
+    <ion-badge [color]="getColor(program.payment_state)">{{program.payment_state=='paid' ? 'Payé': 'Non payé'}}</ion-badge>
+  </ion-col>
+  <ion-col size="3" class="ion-text-center">
+    <div>
+      <strong>{{ program.amount | currency:program.currency_id.name:'symbol':'1.0-0':lang }} </strong> <br>
+      <span>{{getState(program.state)}}</span>
+    </div>
+  </ion-col> 
+</ion-row>

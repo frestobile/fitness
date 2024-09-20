@@ -1,0 +1,20 @@
+.bloc-menus{
+    ion-item{
+        margin-bottom: 1.2em;
+        border-radius: 15px;
+        text-align: center;
+
+        ion-thumbnail {
+            padding-top: 7px;
+            img{
+                height: 40px;
+                width: 40px;
+            }
+        } 
+    }
+}
+
+.txt-book{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

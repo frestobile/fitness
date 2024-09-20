@@ -1,0 +1,194 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar-style">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <!-- Header statistics -->
+<div class="header">
+  <div *ngIf="current_user">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <div class="login-logo">
+            <img src="{{defaultImg}}" alt="Fitness Profile" />
+          </div>
+        </ion-col>
+        <ion-col>
+          <h1 class="title-name">{{current_user.firstname}} {{current_user.lastname}}</h1>
+          <ion-row>
+            <ion-col size="3">
+              <ion-text class="sub-title-nbr">100</ion-text><br>
+              <span class="sub-title">followers</span>
+            </ion-col>
+            <ion-col size="3">
+              <ion-text class="sub-title-nbr">1.000</ion-text><br>
+              <span class="sub-title">followings</span>
+            </ion-col>
+          </ion-row>
+          <div>
+            <ion-card class="progression" *ngIf="current_level">
+              <ion-row class="level-style">
+                <div>
+                  <ion-icon src="assets/icon/timer.svg" item-left color="primary" class="icon-size"></ion-icon>
+                  <ion-label class="title-col" [color]="current_level.color">{{current_level.name}} </ion-label>
+                </div>
+
+                <div>
+                  <span class="title-col">100 séances</span>
+                </div>
+              </ion-row>
+              <div class="bg_level"></div>
+              <div [class]="'bg_level '+current_level.color">
+              </div>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>
+
+<ion-content>
+  <!-- statistics -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Statistiques</ion-label>
+        </ion-col><br>
+        <ion-col>
+          <span class="sub-title-stats">Cette semaine</span>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <ion-card class="stat-card">
+        <ion-row class="stat-content">
+          <ion-col>
+            <div>
+              <ion-label class="stats-cal-title">Calories</ion-label><br>
+              <span class="stats-cal-value">165,8 kcal</span>
+            </div>
+            <br>
+            <div>
+              <ion-label class="stats-cal-title">Durée</ion-label><br>
+              <span class="stats-cal-value">2:00:45</span>
+            </div>
+          </ion-col>
+          <ion-col size="9">
+            <div>
+              <apx-chart [chart]="barOptions.chart!" [series]="barOptions.series!" [stroke]="barOptions.stroke!"
+                [markers]="barOptions.markers!" [labels]="barOptions.labels!" [grid]="barOptions.grid!"
+                [xaxis]="barOptions.xaxis!" [yaxis]="barOptions.yaxis!" [plotOptions]="barOptions.plotOptions!"
+                [dataLabels]="barOptions.dataLabels!">
+
+              </apx-chart>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Entrainement -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Entraînements</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <swiper-container slides-per-view="1.70">
+        <swiper-slide class="bloc_coach" *ngFor="let obj of entrainements">
+          <ion-row>
+            <img src="{{defaultImg}}" class="img-entrainement" />
+            <ion-col>
+              <div class="entrainement-title"><span class="text-title">Marche à pieds</span></div>
+              <div class="entrainement-sub-title"><span class="text-sub-title">il y'a 4 jours</span></div>
+            </ion-col>
+          </ion-row>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+
+
+  <!-- Photos -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Photos</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <app-list-images
+        [images]="entrainements"
+        (showImage)="showDetailsImage($event)">
+      </app-list-images>
+<!--       <swiper-container slides-per-view="3">
+        <swiper-slide class="bloc_coach" *ngFor="let obj of entrainements">
+          <ion-row>
+            <img src="{{defaultImg}}" class="img-picture" />
+          </ion-row>
+        </swiper-slide>
+      </swiper-container> -->
+    </div>
+  </div>
+
+
+  <!-- Videos -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Vidéos</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <app-list-videos
+      [videos]="entrainements"
+      (showVideo)="showDetailsVideo($event)">
+    </app-list-videos>
+<!--       <swiper-container slides-per-view="1.70">
+        <swiper-slide *ngFor="let obj of entrainements">
+          <ion-row>
+            <div>
+              <ion-icon class="icon-play" src="assets/icon/player.svg"></ion-icon>
+              <video class="video-style" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline"
+                crossorigin="anonymous">
+                <source src="https://www.youtube.com/shorts/EE-uIufjCho" type="video/mp4">
+              </video>
+            </div>
+          </ion-row>
+        </swiper-slide>
+      </swiper-container> -->
+    </div>
+  </div>
+
+
+</ion-content>

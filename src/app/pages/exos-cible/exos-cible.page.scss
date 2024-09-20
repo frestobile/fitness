@@ -1,0 +1,21 @@
+ion-grid{
+    ion-row{
+        margin-bottom: 1rem;
+    }
+}
+
+.bloc-bodies{
+    display: flex;
+    margin-top: 3rem;
+    width: 300px;
+    margin: auto;
+
+    div:last-child{
+        margin-left: 4rem;
+    }
+}
+
+.txt-medium{
+    font-weight: 900;
+    font-size: 0.85rem;
+}

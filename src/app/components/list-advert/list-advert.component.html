@@ -1,0 +1,17 @@
+<swiper-container slides-per-view="1">
+  <swiper-slide *ngFor="let obj of pubs | slice:0:4">
+    <ion-row (click)="showPub(obj)" class="ion-align-items-center">
+      <ion-col>
+        <ion-text color="medium">{{obj.date_start| date:"mediumDate":"":lang}} &bull; <strong>{{getState(obj.state)}}</strong> </ion-text>
+        <p class="ion-text-wrap">{{obj.duration_days}} jour(s)</p>
+        <ion-text>Par {{obj.partner_id.name}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <div>
+          <!-- <ion-icon class="icon-play" src="assets/icon/player.svg"></ion-icon> -->
+          <img class="video-style" src="{{defaultImg}}" alt="Advertising" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </swiper-slide>
+</swiper-container>

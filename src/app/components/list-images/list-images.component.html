@@ -1,0 +1,7 @@
+<swiper-container slides-per-view="2.60">
+  <swiper-slide class="bloc_coach" *ngFor="let obj of images">
+    <ion-row (click)="viewPhoto(obj)">
+      <img src="{{defaultImg}}" class="img-picture" />
+    </ion-row>
+  </swiper-slide>
+</swiper-container>

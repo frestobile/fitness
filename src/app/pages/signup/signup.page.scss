@@ -1,0 +1,24 @@
+.no_account{
+    margin-top: 3em;
+    .txt-or .txt-middle{
+        width: 180px;
+        font-family: "Urbanist-SemiBold";
+    }
+}
+
+.cutom-btn{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.other_option{
+    margin-top: 2em;
+    ion-text{
+        font-size: 0.8em;
+        font-family: "Urbanist-SemiBold";
+    }
+
+    ion-text:last-child{
+        text-decoration: underline;
+    }
+}

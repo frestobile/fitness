@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Historique abonnements</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-empty-list *ngIf="is_pending"></app-empty-list>
+
+  <div *ngIf="!is_pending">
+    <ion-item lines="none">
+      <ion-label color="medium"><h3>Historique de vos abonnements</h3></ion-label>
+    </ion-item>
+    <ion-item *ngFor="let obj of subs" lines="full">
+      <ion-button mode="ios" slot="start" [color]="getState(obj.state)['btn']">
+        <ion-icon [color]="getState(obj.state)['color_icon']" slot="icon-only" 
+        [name]="getState(obj.state)['icon']"></ion-icon>
+      </ion-button>
+       <ion-label>
+          <h3>{{obj.name}}</h3>
+          <p>A renouveler le {{obj.next_payment_date | date:'mediumDate':'':lang}} </p>
+          <span>{{daysLeft(obj.date)}} jour(s) restants</span> &bullet; <ion-text [color]="getColor(obj.payment_state)" >{{obj.payment_state=='paid' ? 'Payé':'Non payé'}} </ion-text>
+       </ion-label> 
+       <strong slot="end"> {{obj.amount | currency:obj.currency_id.name:'symbol':'1.0-0':lang }} </strong>
+    </ion-item>
+
+    <app-empty-view *ngIf="!subs.length"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+  </div>
+
+<!--   <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="postAdvert()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+</ion-content>

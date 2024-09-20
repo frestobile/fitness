@@ -1,0 +1,32 @@
+<div *ngIf="current_user">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <div class="login-logo">
+          <img src="{{imgLogo}}" alt="Fitness Profile" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <h1 class="title-name">Totio Kamdem </h1>
+        <ion-row>
+          <ion-col size="3">
+            <ion-text class="sub-title-nbr">100</ion-text><br>
+            <span class="sub-title">followers</span>
+          </ion-col>
+          <ion-col size="3">
+            <ion-text class="sub-title-nbr">1000</ion-text><br>
+            <span class="sub-title">followings</span>
+          </ion-col>
+        </ion-row>
+        <div>
+          <ion-row margin-bottom margin-top padding-top>
+            <ion-icon src="assets/icon/timer.svg" item-left color="primary" class="icon-size"></ion-icon>
+            <span class="title-col" margin-left>Débutant</span>
+            <span style="display: flex;"></span>
+            <span class="title-col">100 séances</span>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

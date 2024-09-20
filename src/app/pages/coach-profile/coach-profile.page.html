@@ -1,0 +1,235 @@
+<ion-header [translucent]="true" [ngStyle]="{'background-image': 'url(' + bg_image + ')'}" class="bloc_user">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goToPrevious()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ coach.last_name + " " + coach.first_name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onShowPop($event)" fill="clear" color="light" >
+        <ion-icon slot="icon-only" name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover [isOpen]="isPop" (didDismiss)="isPop = false">
+      <ng-template>
+        <ion-content class="ion-padding bloc-popup">
+          <ion-item (click)="rateCoach()" lines="none">
+            <ion-label>Notez {{coach?.name}}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="!is_created" (click)="sendMessageRequest()" lines="none">
+            <ion-label>Envoyer un message</ion-label>
+          </ion-item>
+          <ion-item *ngIf="is_created || pending_delete" class="ion-text-center">
+            <ion-spinner name="dots"></ion-spinner>
+          </ion-item>
+          <ion-item *ngIf="is_follower && !pending_delete" (click)="removeRelation()" lines="none">
+            <ion-label color="rouge">Supprimer la relation</ion-label>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+  <ion-item lines="none" color="transparent" class="mt-8">
+    <ion-avatar slot="start">
+      <img [src]="coach.profile_image" />
+    </ion-avatar>
+    <ion-label color="light">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col *ngIf="coach" size="3">
+            <ion-text class="d-block">1,532</ion-text>
+            <span class="d-block">followers</span>
+          </ion-col>
+          <ion-col size="3">
+            <ion-text class="d-block">235</ion-text>
+            <span class="d-block">followings</span>
+          </ion-col>
+          <ion-col size="3">
+            <ion-text class="d-block">20</ion-text>
+            <span class="d-block">élèves</span>
+          </ion-col>
+          <ion-col class="text-end">
+            <span class="fs-1" (click)="sendMessageRequest()" >
+              <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            </span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="my-1">
+          <hr />
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <span class="padding-label-primary" color="light">Prix moyen</span>
+            <h3 class="mt-2 ms-4">100$</h3>
+          </ion-col>
+          <ion-col>
+            <h5>20 formations</h5>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <!-- Expert domain -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Domaines d'expertise</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <!-- <span class="see-more">Voir tout</span> -->
+      </div>
+    </ion-row>
+    <div>
+      <swiper-container slides-per-view="3.25" space-between="12">
+        <swiper-slide class="bloc_coach" *ngFor="let obj of sport_types">
+          <div class="ion-text-center">
+            <ion-label color="primary">{{obj.name}}</ion-label>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+
+    <!-- Advertising -->
+    <div *ngIf="current_user && current_user.role=='coach'" class="stat-body-style">
+      <ion-row class="level-style">
+        <div>
+          <ion-col>
+            <ion-label class="title">Publicités</ion-label>
+          </ion-col>
+        </div>
+        <div>
+          <span *ngIf="adverts.length>=4" (click)="moreAdverts()" class="see-more">Voir tout</span>
+        </div>
+      </ion-row>
+      <div *ngIf="is_advert">
+        <ion-item lines="none">
+          <ion-thumbnail  slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label><h2><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h2></ion-label>
+        </ion-item>
+      </div>
+      <div *ngIf="!is_advert">
+        <app-list-advert
+          [pubs]="adverts"
+          (showAdvert)="goToAdvert($event)">
+        </app-list-advert>
+
+        <div *ngIf="!adverts.length" class="bloc-empty">
+          <h3>Aucune publicité disponible</h3>
+        </div>
+      </div>
+    </div>
+
+  <!-- Sessions -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Séances</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span *ngIf="params!=null && sessions.length>=6" class="see-more" (click)="showBootCamps()">Voir tout</span>
+      </div>
+    </ion-row>
+    <div *ngIf="is_session">
+      <ion-item lines="none">
+        <ion-thumbnail  slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label><h2><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h2></ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="!is_session">
+      <app-list-sessions
+        [sessions]="sessions"
+        (viewSession)="showDetailsSession($event)">
+      </app-list-sessions>
+
+      <div *ngIf="!sessions.length" class="ion-text-center ion-padding-top">
+        <ion-label color="medium"><h2>Aucun programme défini par le coach</h2></ion-label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Programs -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Programs</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span *ngIf="params!=null && programs.length>=6" class="see-more" (click)="showBootCamps()">Voir tout</span>
+      </div>
+    </ion-row>
+    <div *ngIf="is_program">
+      <ion-item lines="none">
+        <ion-thumbnail  slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label><h2><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h2></ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="!is_program">
+      <app-list-programs
+        [programs]="programs"
+        (viewProgram)="showDatailsProgram($event)">
+      </app-list-programs>
+
+      <div *ngIf="!programs.length" class="ion-text-center ion-padding-top">
+        <ion-label color="medium"><h2>Aucun programme défini par le coach</h2></ion-label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photos -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Photos</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <app-list-images
+        [images]="images"
+        (showImage)="showDetailsImage($event)">
+      </app-list-images>
+    </div>
+  </div>
+
+  <!-- Videos -->
+  <div class="stat-body-style">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title">Vidéos</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+    <div>
+      <app-list-videos
+        [videos]="videos"
+        (showVideo)="showDetailsVideo($event)">
+      </app-list-videos>
+    </div>
+  </div>
+
+</ion-content>

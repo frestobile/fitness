@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Log Book</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="txt-book">
+    <ion-label color="medium"><h3>Choisissez une catégorie sportive pour consulter les séances</h3></ion-label>
+  </div>
+
+  <div *ngIf="is_pending" class="bloc-menus">
+    <ion-item *ngFor="let obj of [1,2,3,4,5]" lines="none">
+      <ion-thumbnail  slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label><h2><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h2></ion-label>
+      <ion-text slot="end"> </ion-text>
+    </ion-item>
+  </div>
+
+  <div *ngIf="!is_pending" class="bloc-menus">
+    <ion-item *ngFor="let obj of sport_types; let i = index;" lines="none" color="{{tab_colors[i%tab_colors.length]}}" (click)="goToDetails(obj)">
+      <ion-thumbnail  slot="start">
+        <img src="assets/imgs/icons/{{obj.name.toLocaleLowerCase()}}.png" />
+      </ion-thumbnail>
+      <ion-label><h2>{{obj.name}}</h2></ion-label>
+      <ion-text slot="end"> </ion-text>
+    </ion-item>
+
+    <div class="bloc-empty" *ngIf="!sport_types.length">
+      <h3>Aucune catégrorie sportive définie</h3>
+    </div>
+  </div>
+</ion-content>

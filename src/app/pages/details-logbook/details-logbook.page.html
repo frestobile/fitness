@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{sportType?.name}}</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="onCalendar()">
+        <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="bloc-history">
+    <ion-label class="txt-title"><h3>Séances</h3></ion-label>
+    <ion-grid *ngIf="is_pending">
+      <ion-row *ngFor="let obj of [1,2,3]">
+        <ion-col size="12"><ion-skeleton-text [animated]="true" style="width: 50%;"></ion-skeleton-text></ion-col>
+        <ion-col class="ion-text-center">
+          <h4><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h4>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <h4><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h4>
+        </ion-col>
+        <ion-col class="txt-date ion-text-center" size="12"><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="!is_pending">
+      <ion-row *ngFor="let obj of entrainements" (click)="showDetails(obj)">
+        <ion-col class="ion-text-center" size="12"><strong>{{obj.name}}</strong></ion-col>
+        <ion-col class="ion-text-center">
+          <ion-icon src="assets/imgs/icons/svg/musculation.svg"></ion-icon><br>
+          <h4>{{obj.exercise_line_ids.length}} <span>exercice(s)</span></h4>
+          
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <ion-icon src="assets/imgs/icons/svg/allure.svg"></ion-icon><br>
+          <h4> <span>{{getState(obj.state)}}</span></h4>
+        </ion-col>
+        <ion-col class="txt-date ion-text-center" size="12"><strong>{{obj.planned_date_begin | date:'mediumDate':'':lang}}</strong></ion-col>
+      </ion-row>
+      
+      <app-empty-view *ngIf="!entrainements.length" [isButton]="showButton"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+    </ion-grid>
+  </div>
+
+  <!-- Select Modal -->
+  <ion-modal #modal [isOpen]="is_history" (didDismiss)="handleClose($event)">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="onClose()" fill="clear">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title *ngIf="selectedSeance" class="ion-text-center">{{selectedSeance.name}}</ion-title>
+          <!-- <ion-buttons slot="end">
+            <ion-button (click)="onShowWeek()" fill="clear">
+              <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+            </ion-button>
+          </ion-buttons> -->
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="bloc-contenu ion-padding">
+
+          <ion-label color="medium" class="txt-title"><h3>Résultats de votre session sportive le {{ sportType.histories[0].date | date:'mediumDate':'':lang }} </h3></ion-label>
+
+          <ion-grid>
+            <ion-row *ngFor="let item of sportType.histories[0].data" class="ion-align-items-center">
+              <ion-col size="2">
+                <ion-icon src="assets/imgs/icons/svg/{{item.id}}.svg"></ion-icon>
+              </ion-col>
+              <ion-col class="ion-text-center" size="4">
+                <strong>{{item.value}}</strong> <span *ngIf="item.unit">{{item.unit}}</span>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right">
+                <ion-text>{{item.name | uppercase }}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- End select modal-->
+</ion-content>
+<!-- <ion-footer class="ion-no-border">
+<ion-button color="medium" expand="block" fill="clear" [strong]="true" mode="ios" (click)="addBloc()">
+  <ion-icon name="add" slot="start"></ion-icon>  Ajouter un nouveau bloc
+</ion-button>
+</ion-footer> -->

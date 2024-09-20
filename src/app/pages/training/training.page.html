@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ exercise?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="div-item">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="level-style-serie">
+        <div class="input-style">
+          <span class="date-left"></span>
+        </div>
+        <div class="hour-style-div">
+          <span class="hour-style">{{ minuteCount }}</span>
+        </div>
+        <div class="start-icon">
+          <ion-icon (click)="playExercise()" [src]="is_start?'assets/icon/pause.svg':'assets/icon/player.svg'"></ion-icon>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="container">
+    <div class="circle">
+      <span class="timer-count">{{ secondCount }}</span>
+    </div>
+  </div>
+
+  <div class="video-block p-4 mt-2">
+    <!-- <img [src]="exercise?.image" alt="Session" *ngIf="!is_play" /> -->
+    <video class="video-style"  width="100%" loop [src]="exercise?.video_url" #video>
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="ion-padding">
+    <div class="container" *ngFor="let item of timeLine; let i = index" >
+      <div [ngClass]="selectedIndex==i?'selected-item':''">
+        <span [ngClass]="selectedIndex==i?'item-selected':'item'">{{ (i+1)+". "+item.title+": "+item.period+"s" }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="div-item">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="level-style-serie">
+          <div class="input-style">
+            <ion-icon name="chevron-back-outline" color="primary" size="64px"></ion-icon>
+          </div>
+          <div class="hour-style-div">
+            <span class="count-page">1/8</span>
+          </div>
+          <div>
+            <ion-icon name="chevron-forward-outline" color="primary" size="64px"></ion-icon>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div style="display: block; text-align: center;">
+      <img src="assets/imgs/Ligne.png" width="145px" style="text-align: center;" />
+    </div>
+  </ion-toolbar>
+</ion-footer>

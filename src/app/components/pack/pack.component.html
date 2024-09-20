@@ -1,0 +1,12 @@
+<ion-item (click)="goToBootcamp(pack)">
+  <ion-thumbnail slot="start">
+    <ion-img [src]="getImage(pack)"></ion-img>
+  </ion-thumbnail>
+  <ion-label>
+    <h2>{{pack.name}}</h2>
+    <div [innerHTML]="pack.description"> </div>
+    
+    <p><ion-text color="primary">{{ getNameOfLevel(pack.sporting_level)?.name }}</ion-text> &bullet; {{5}} séances</p>
+  </ion-label>
+  <strong slot="end">{{ pack.price | currency:pack.currency.name:'symbol':'1.0-0':lang }}</strong>
+</ion-item>

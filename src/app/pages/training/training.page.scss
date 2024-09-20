@@ -1,0 +1,102 @@
+.toolbar-style {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ion-title {
+    font-family: "Urbanist-Bold";
+}
+
+ion-content {
+    --background: var(--ion-color-primary-shade-2);
+}
+
+ion-toolbar {
+    --background: var(--ion-color-primary-shade-2);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--ion-color-primary-shade-2);
+}
+
+.start-icon ion-icon{
+    position: absolute;
+    right: 20px;
+}
+
+.hour-style-div {
+    display: block;
+    text-align: center;
+}
+
+.hour-style {
+    text-align: center;
+    font-family: "Urbanist-Bold";
+    font-size: 1.4rem;
+}
+
+.div-item {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+}
+
+.level-style-serie {
+    justify-content: space-between;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    background-color: white;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.timer-count {
+    display: flex;
+    justify-content: center;
+    font-family: "Urbanist-Bold";
+    font-size: 6.5rem;
+    color: var(--ion-color-primary);
+    align-content: center !important;
+    flex-direction: row;
+    line-height: 10rem;
+}
+
+.selected-item {
+    background-color: white;
+    height: 2.5rem;
+    width: 18rem;
+    border-radius: 10px;
+}
+
+.item-selected {
+    line-height: 2.5rem;
+    justify-content: center;
+    display: flex;
+    font-size: 1rem;
+    color: var(--ion-color-primary);
+    font-family: "Urbanist-Bold";
+}
+
+.item {
+    line-height: 2.5rem;
+    justify-content: center;
+    display: flex;
+    font-size: 1rem;
+    font-family: "Urbanist-Bold";
+}
+
+.count-page{
+    color: var(--ion-color-primary);
+    text-align: center;
+    font-family: "Urbanist-Bold";
+    font-size: 1.4rem;
+}

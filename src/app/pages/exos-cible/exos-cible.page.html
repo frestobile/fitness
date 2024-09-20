@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exercices ciblés</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input aria-label="Email" placeholder="Libellé exercice" [(ngModel)]="objExo.title" ></ion-input>
+    <ion-icon color="gray-medium" name="pencil" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-grid *ngIf="current_date">
+    <p class="ion-text-center"><ion-text color="gray-medium" class="txt-medium">sélectionnez votre plage de dates d'entraînement</ion-text></p>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="5">
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime presentation="date" locale="{{locale_lang}}" min="{{current_date}}" id="datetime"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+      <ion-col class="ion-text-center" size="2"><ion-text>Au</ion-text></ion-col>
+      <ion-col size="5">
+        <ion-datetime-button datetime="datetime2"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime presentation="date" locale="{{locale_lang}}" min="{{current_date}}" id="datetime2"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-text-center" size="12">
+        <ion-text class="txt-medium" color="gray-medium">Quelle partie du corps souhaitez vous travailler ?</ion-text> 
+      </ion-col>
+    </ion-row>
+    <div class="bloc-bodies" [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }" (onPhotoGalleryInit)="onGalleryInit($event);" (onPhotoGalleryDestroy)="onGalleryDestroy()">
+      <div class="ion-text-center" [photoGallery]="'/'+defaultImg+'_selected.jpg'">
+        <img [src]="defaultImg+'.jpg'" height="350px" /><br>
+        <ion-text color="primary">Vue de face</ion-text>
+      </div>
+      <div class="ion-text-center" [photoGallery]="'/'+defaultImg+'_selected_2.jpg'">
+        <img [src]="defaultImg+'_2.jpg'" height="350px" /><br>
+        <ion-text color="primary">Vue de dos</ion-text>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>
+<ion-footer class="ion-no-border ion-text-center">
+  <ion-button color="primary" mode="ios" (click)="selectExos()">Choisir les exercices</ion-button>
+</ion-footer>

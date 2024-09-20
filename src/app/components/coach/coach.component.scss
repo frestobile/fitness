@@ -1,0 +1,62 @@
+ion-card{
+    margin-bottom: 15px;
+    .bloc-img{
+        width: 100%;
+        object-fit: cover;
+        height: 200px;
+    }
+
+    bar-rating{
+        --br-height: 30px;
+    }
+
+    .bloc-description{
+        p{
+            color: var(--ion-color-dark);
+            font-weight: 600;
+        }
+    }
+
+    .followers{
+        display: flex;
+        padding-left: 10px;
+        .bloc-persons{
+            img{
+                height: 25px;
+                width: 25px;
+                position: relative;
+            }
+
+            img:nth-child(2){
+                left: -10px;
+            }
+            img:last-child{
+                left: -20px;
+            }
+        }
+
+        .txt-follower{
+            font-size: 0.70rem;
+            color: var(--ion-color-medium);
+            padding-top: 6px;
+        }
+    }
+
+    .bloc-resume{
+        ion-row ion-col{
+            h4{
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    .bloc-buttons{
+        ion-row ion-col{
+            text-align: center;
+            ion-button{
+                font-family:  'Urbanist-Regular';
+                font-weight: 700;
+            }
+        }
+    }
+}

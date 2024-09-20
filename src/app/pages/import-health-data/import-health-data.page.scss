@@ -1,0 +1,36 @@
+.toolbar-style {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ion-title {
+    font-family: "Urbanist-Bold";
+}
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center
+
+}
+
+ion-label {
+    font-size: 0.9rem;
+    color: var(--ion-color-gray-2);
+    font-family: "Urbanist-SemiBold";
+}
+
+.mySwiper {
+    --swiper-pagination-color: #00FF5D;
+    --swiper-pagination-bullet-size: 30px;
+    --swiper-pagination-bullet-width: 30px;
+    --swiper-pagination-bullet-height: 30px;
+}

@@ -1,0 +1,27 @@
+ion-item{
+    --background: transparent;
+    ion-avatar{
+        background: var(--ion-color-grislight);
+        // img{
+        //     height: 20px;
+        //     width: 20px;
+        //     margin-left: 10px;
+        //     margin-top: 10px;
+        // }
+    }
+
+    p{
+        font-family: "Urbanist-Bold";
+    }
+
+    ion-note{
+        text-align: center;
+        ion-badge{
+            height: 20px;
+            width: 20px;
+            border-radius: 20px;
+            margin-top: 5px;
+            padding: 3px;
+        }
+    }
+}

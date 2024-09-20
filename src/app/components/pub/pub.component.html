@@ -1,0 +1,18 @@
+<ion-row (click)="showPub(pub)" class="ion-align-items-center">
+  <ion-col size="9">
+    <ion-text color="medium">début le {{pub.date_start| date:"mediumDate":"":lang}} &bull; <strong class="state">{{getState(pub.state)}}</strong> </ion-text>
+    <p class="ion-text-wrap">Coach {{pub.partner_id.name}} &bullet; {{pub.duration_days}} jour(s)</p>
+    <ion-badge *ngIf="supplier" [color]="getColor(pub.payment_state)">{{pub.payment_state=='paid' ? 'Payé': 'Non payé'}}</ion-badge>
+  </ion-col>
+  <ion-col size="3" class="ion-text-center">
+    <div>
+      <strong *ngIf="supplier">{{ pub.amount | currency:pub.currency_id.name:'symbol':'1.0-0':lang }} </strong>
+      <!-- <ion-icon class="icon-play" src="assets/icon/player.svg"></ion-icon>
+      <video class="video-style" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline"
+        crossorigin="anonymous">
+        <source src="https://www.youtube.com/shorts/EE-uIufjCho" type="video/mp4">
+      </video> -->
+      
+    </div>
+  </ion-col> 
+</ion-row>

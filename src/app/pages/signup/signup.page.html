@@ -1,0 +1,105 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-logo ion-text-center ion-margin-bottom">
+    <ion-label color="dark"><h1>Créer votre compte</h1></ion-label>
+  </div> 
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list class="login-form ion-margin-top" lines="none">
+      <!-- <ion-item>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="login.lastname" placeholder="Nom" name="lastname" type="text" #lastname="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="lastname.valid || submitted == false" class="ion-padding-start">Votre Nom est requis</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="login.firstname" placeholder="Prénom" name="firstname" type="text" #firstname="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="firstname.valid || submitted == false" class="ion-padding-start">Votre Prénom est requis</p>
+      </ion-text> -->
+
+      <ion-item>
+        <ion-icon name="person" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.username" placeholder="Nom.Prénom" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">Votre Nom est requis</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-icon name="mail" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.email" placeholder="{{'login.email' | translate}}" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+          {{'login.email_required' | translate}}
+        </p>
+      </ion-text>
+
+      <!-- <ion-label color="darkmedium"> {{'login.password' | translate}}</ion-label> -->
+      <ion-item>
+        <ion-icon name="lock-closed" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.password" placeholder="{{'login.password' | translate}}" name="password" [type]="'password'" #password="ngModel" required></ion-input> 
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="lock-closed" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.repeat_password" placeholder="{{'login.password_repeat' | translate}}" name="repeat_password" [type]="'password'" #repeat_password="ngModel" required></ion-input>
+        
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          {{'login.password_required' | translate}}
+        </p>
+      </ion-text>
+    </ion-list>
+    <div class="ion-margin-top ion-margin-bottom cutom-btn">
+      <ion-button enterkey="send" mode="ios" shape="round" [disabled]="is_pending" color="primary" (click)="onRegister(loginForm)" type="submit" expand="block">Continuer <ion-spinner *ngIf="is_pending" color="light"></ion-spinner> </ion-button>
+    </div>
+
+  </form>
+
+  <div class="ion-text-center no_account">
+    <div class="ion-text-center txt-or">
+      <div class="line"></div>
+      <div class="txt-middle">ou continuer avec</div>
+    </div>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col></ion-col>
+        <ion-col> <img src="{{img_fb}}" alt="Facebook" height="40px" /> </ion-col>
+        <ion-col> <img src="{{img_google}}" alt="Google" height="40px" /> </ion-col>
+        <ion-col> <img src="{{img_apple}}" alt="Apple" height="40px" /> </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="ion-text-center other_option">
+      <ion-text color="medium">Vous avez déjà un compte ? </ion-text>
+      <ion-text color="primary" (click)="goToLogin()">Identifiez vous</ion-text>
+      <!-- <ion-button mode="ios" color="primary" fill="clear" size="small" [strong]="true" (click)="goToSignUp()">Créer un compte</ion-button> -->
+    </div>
+  </div>
+    
+</ion-content>

@@ -1,0 +1,23 @@
+@import "../list-videos/list-videos.component.scss";
+
+.video-style {
+    width: 134px;
+}
+
+.icon-play {
+    padding-left: 20px;
+}
+
+ion-row{
+    ion-col {
+        p{
+            font-size: 0.85rem;
+            font-weight: 900;
+        }
+
+        ion-text{
+            font-size: 0.85rem;
+            color: var(--ion-color-medium);
+        }
+    }
+}

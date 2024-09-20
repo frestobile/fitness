@@ -1,0 +1,33 @@
+ion-item{
+  --padding-start: 5px;
+  .name {
+    font-weight: 600;
+  }
+  .duration {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0CB8E0;
+  }
+  .count {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #9E9898;
+  }
+  .price {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.img-entrainement{
+    width: 100%;
+    object-fit: cover;
+    max-height: 180px;
+}
+
+.padding-label-primary {
+  color: #fff;
+  position: absolute;
+  margin-top: -34px;
+  margin-left: 6px;
+}

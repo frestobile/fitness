@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Programmes sur mesure</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-empty-list *ngIf="is_pending"></app-empty-list>
+
+  <div *ngIf="!is_pending" class="list-boot">
+    <ion-item *ngFor="let obj of pubs" (click)="goToBootcamp(obj)">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="getImage(obj)"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{obj.name}}</h2>
+        <div [innerHTML]="obj.description"> </div>
+        
+        <p><ion-text color="primary">{{ getNameOfLevel(obj.sporting_level)?.name }}</ion-text> &bullet; {{5}} sessions</p>
+      </ion-label>
+      <strong slot="end">{{ obj.price | currency:obj.currency.name:'symbol':'1.0-0':lang }}</strong>
+    </ion-item>
+
+    <app-empty-view *ngIf="!pubs.length"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+  </div>
+</ion-content>

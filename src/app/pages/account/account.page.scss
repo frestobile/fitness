@@ -1,0 +1,172 @@
+.bloc_user {
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 15px;
+    min-height: 220px;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
+    ion-item {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        ion-avatar {
+            height: 84px;
+            width: 84px;
+            border: 2px solid var(--ion-color-light);
+        }
+
+        ion-label {
+            ion-grid {
+                ion-row {
+                    ion-col {
+                        ion-text {
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 1.4;
+                            // padding-bottom: 4px;
+                        }
+
+                        span {
+                            font-size: 13px;
+                            font-weight: 500;
+                        }
+
+                        ion-button {
+                            button {
+                                background-color: inherit;
+                                width: 30px;
+                                height: 30px;
+                            }
+                        }
+                    }
+
+                    hr {
+                        background-color: #fff;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        ion-icon {
+            font-size: 28px;
+        }
+    }
+
+    .btn-follow {
+        position: absolute;
+        right: 15px;
+    }
+
+}
+
+ion-card {
+    ion-item {
+        ion-label {
+            font-family: "Urbanist-Bold";
+            color: var(--ion-color-medium);
+        }
+
+        ion-icon:last-child {
+            font-size: 1.2em;
+        }
+
+        .expiration {
+            color: var(--ion-color-rouge);
+        }
+    }
+}
+
+// .bloc-bottom{
+//     position: relative;
+//     top:-2rem;
+// }
+
+.item-native {
+    border-width: 0;
+}
+
+
+.title-name {
+    font-size: 17px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.sub-title-nbr {
+    font-size: 11px;
+    color: #707070;
+    font-family: "Urbanist-Bold";
+}
+
+.sub-title {
+    font-size: 11px;
+    color: #707070;
+    font-size: 9px;
+}
+
+.icon-size {
+    width: 11px;
+    height: 11px;
+}
+
+.title-col {
+    font-size: 9px;
+    font-family: "Urbanist-Bold";
+    margin-left: 5.38px;
+}
+
+.level-style {
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progression {
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: none !important;
+    margin: auto;
+    padding: 0px;
+    border-radius: 0px;
+    background-color: inherit;
+
+    .title-col {
+        color: #1CD9B9;
+    }
+
+    .bg_level {
+        background: var(--ion-color-grislight);
+        height: 10px;
+        border-radius: 20px;
+    }
+
+    .vert-soft,
+    .orange,
+    .rouge {
+        position: relative;
+        top: -10px;
+        text-align: center;
+
+        ion-icon {
+            font-size: 1.6rem;
+            margin-top: 3px;
+        }
+    }
+
+    .vert-soft {
+        width: 25%;
+        background: var(--ion-color-vert-soft);
+    }
+
+    .orange {
+        width: 50%;
+        background: var(--ion-color-orange);
+    }
+
+    .rouge {
+        width: 100%;
+        background: var(--ion-color-rouge);
+    }
+}

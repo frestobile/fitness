@@ -1,0 +1,37 @@
+ion-card{
+    img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    ion-chip{
+        margin-left: 0;
+        ion-label{
+            font-weight: 900;
+        }
+    }
+}
+
+p{
+    font-weight: 700;
+    color: var(--ion-color-medium);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.txt-sub{
+    margin-left: 12px;
+    margin-bottom: 2rem;
+}
+
+.options_payment{
+    ion-item{
+        margin-top: 1.5rem;
+        border: 1px solid var(--ion-color-medium);
+        border-radius: 0.6rem;
+        ion-label{
+            color: var(--ion-color-medium);
+            font-family: 'Urbanist-SemiBold';
+        }
+    }
+}

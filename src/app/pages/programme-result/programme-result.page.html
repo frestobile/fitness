@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Résultat les plus pertinents</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="content-style">
+    <ion-item *ngFor="let item of [1,2,3,4,5]">
+      <ion-avatar slot="start">
+        <img [src]="defaultImg" alt="Lock" />
+      </ion-avatar>
+      <ion-label>
+        <h6>Jc Duville</h6>
+        <p>Coach Fitness</p>
+      </ion-label>
+      <bar-rating [readOnly]="true" [rate]="3.5">
+      </bar-rating>
+      &nbsp;&nbsp;
+      <p class="rating-style">3.5</p>
+    </ion-item>
+
+    
+  </ion-list>
+
+</ion-content>

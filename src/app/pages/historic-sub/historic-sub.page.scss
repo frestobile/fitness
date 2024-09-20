@@ -1,0 +1,23 @@
+ion-item{
+    ion-button{
+        height: 57px;
+        width: 45px;
+        margin-right: 9px;
+        margin-left: 0;
+    }
+
+    ion-label {
+        p, ion-text, span{
+            font-size: 0.85em;
+            font-weight: 800;
+        }
+
+        p{
+            color: var(--ion-color-medium);
+        }
+    }
+
+    strong{
+        color: var(--ion-color-primary);
+    }
+}

@@ -1,0 +1,53 @@
+.custom-form {
+    ion-item{
+      margin-bottom: 15px;
+      ion-input{
+        min-height: auto;
+      }
+    }
+  
+    .custom-title ion-label{
+      font-weight: 200;
+    }
+
+    .txt_title{
+        margin-bottom: 16px;
+        margin-top: 50px;
+        color: var(--ion-color-medium);
+    }
+  }
+  
+  .icon-camera{
+    position: absolute;
+      font-size: 1.5em;
+      top: 113px;
+      border-radius: 100%;
+      padding: 6px;
+      border: 2px solid var(--ion-color-medium);
+      background: var(--ion-color-light);
+      right: 4.4em;
+  }
+  
+  .login-logo img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  
+  .bloc-password{
+    margin-top: 40px;
+    border-top: 1px solid var(--ion-color-grislight);
+  }
+ 
+  ion-intl-tel-input {
+    ::ng-deep .ionic-selectable-has-placeholder div.ionic-selectable-value-item 
+    {
+      content: "";
+      display: inline-block;
+      width: 23px;
+      background-color: var(--placeholder-color, #999);
+      height: 18px;
+      font-size: 0px;
+    }
+  }

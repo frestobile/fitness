@@ -1,0 +1,19 @@
+.bloc-content{
+    h3 {
+        color: #00BB07;
+    }
+    p{
+        font-weight: 600;
+        color: #000;
+        background-color: #F2F2F2;
+        padding: 24px 24px;
+        font-size: 14px;
+        border-radius: 10px;
+        line-height: 1.4;
+    }
+    ion-button {
+        width: 80%;
+        --border-radius: 24px;
+        margin-top: 48px;
+    }
+}

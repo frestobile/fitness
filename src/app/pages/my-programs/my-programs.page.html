@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mes Programs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-empty-list *ngIf="is_pending"></app-empty-list>
+
+  <div *ngIf="!is_pending" class="list-boot">
+    <ion-item *ngFor="let program of myPrograms" >
+      <ion-thumbnail slot="start">
+        <ion-img [src]="getImage(program)"></ion-img>
+      </ion-thumbnail>
+      <ion-label (click)="goToDetail(program.id)">
+        <h2>{{program.name}}</h2>
+        <div [innerHTML]="program.description"> </div>
+        <ion-text color="primary">{{ program.sporting_level }}</ion-text>
+        <p>{{program.schedules.length}} exericses</p>
+      </ion-label>
+      <span>
+        <strong slot="end">{{ program.price | currency:program.currency.name:'symbol':'1.0-0':lang }}</strong> <br>
+      </span>
+    </ion-item>
+
+    <app-empty-view *ngIf="!myPrograms.length"  [message]="errorMessage" (retry)="handleRetry($event)"></app-empty-view>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" *ngIf="user_role=='coach'" >
+    <ion-fab-button color="primary" (click)="goToCreateProgram()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

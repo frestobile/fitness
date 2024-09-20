@@ -1,0 +1,175 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title size="small">Programmes</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button [disabled]="true" fill="clear">
+        <div (click)="goToPage('search')">
+          <img height="32px" src="assets/icon/bg_search.png" alt="Icon" class="icon-bg-search" />
+          <img height="20px" src="assets/icon/search.svg" alt="Icon" class="icon-search" />
+        </div>
+      </ion-button> -->
+      <ion-button (click)="onShowOption($event)">
+        <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover [isOpen]="isPop" (didDismiss)="isPop = false">
+      <ng-template>
+        <ion-content class="ion-padding bloc-popup">
+          <ion-item lines="none" *ngFor="let obj of menu_options" [disabled]="!obj.active" (click)="goToPage(obj.id)">
+            <ion-label color="medium">{{obj.name}}</ion-label>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+
+<div>
+<!--   <ion-header collapse="condense">
+    <ion-toolbar class="toolbar-style">
+      <ion-title size="small">Programmes</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <div>
+<!--     <ion-grid>
+      <ion-row class="level-style-01">
+        <div>
+        </div>
+        <div (click)="goToPage('search')">
+          <img height="32px" src="assets/icon/bg_search.png" alt="Icon" class="icon-bg-search" />
+          <img height="20px" src="assets/icon/search.svg" alt="Icon" class="icon-search" />
+        </div>
+      </ion-row>
+    </ion-grid> -->
+
+    <div class="ion-padding bg_gray">
+      <div>
+        <ion-text class="text-title-style">Séances de la semaine</ion-text>
+      </div>
+      <swiper-container slides-per-view="7.1">
+        <swiper-slide *ngFor="let obj of days;let i = index;" [ngStyle]="{'background-image': !obj.checked ? 'url()': 'url(' + obj.bg + '_bg.png)','background-repeat': 'no-repeat',
+          'height':'3em', 'background-size': 'contain', 'background-position':'center'}" (click)="selectDays(obj, i)">
+          <ion-text class="text-style" [color]="obj.checked ? 'light':'medium'">{{obj.name}}</ion-text>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+</div>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-text class="title-style">Séances</ion-text>
+  </div>
+
+  <!-- programe list -->
+  <div *ngIf="is_pending" class="ion-padding ion-text-center">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+  <div *ngIf="!is_pending">
+    <div *ngFor="let obj of session_schedule_lines; let i = index;" (click)="showSession(obj.session_schedule)">
+      <ion-grid class="item-prog" [ngStyle]="{'background-image': 'url(' + bg_card_green + ')'}">
+        <ion-row class="level-style">
+          <div>
+            <span class="title-item-prog">{{obj.session.name}}</span><br>
+            <span class="sub-title-item-prog">{{ obj.session.schedules.length }} exercises</span>
+          </div>
+          <div>
+            <ion-label class="title-item-prog-time">Durée</ion-label><br>
+            <ion-label class="sub-title-item-prog-time">{{ obj.session_schedule.start_time + " ~ " + obj.session_schedule.end_time }} </ion-label><br>
+
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="bloc-empty" *ngIf="!session_schedule_lines.length">
+      <h3>Aucune séance prévue ce jour {{selected_day}} </h3>
+    </div>
+  </div>
+
+  <div class="ion-padding">
+    <ion-text class="title-style">Programme</ion-text>
+  </div>
+
+  <!-- programe list -->
+  <div *ngIf="is_pending" class="ion-padding ion-text-center">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+  <div *ngIf="!is_pending">
+    <div *ngFor="let obj of program_schedule_lines; let i = index;" (click)="showProgram(obj.program_schedule)">
+      <ion-grid class="item-prog" [ngStyle]="{'background-image': 'url(' + bg_card_blue + ')'}">
+        <ion-row class="level-style">
+          <div>
+            <span class="title-item-prog">{{obj.program.name}}</span><br>
+            <span class="sub-title-item-prog">{{ obj.program.schedules.length }} exercises</span>
+          </div>
+          <div>
+            <ion-label class="title-item-prog-time">Durée</ion-label><br>
+            <ion-label class="sub-title-item-prog-time">{{ obj.program_schedule.start_time + " ~ " + obj.program_schedule.end_time }} </ion-label><br>
+
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="bloc-empty" *ngIf="!program_schedule_lines.length">
+      <h3>Aucune programme prévue ce jour {{selected_day}} </h3>
+    </div>
+  </div>
+
+
+  <!--Statistiques -->
+  <div class="stats" *ngIf="current_user && current_user.role=='client'">
+    <ion-row class="level-style">
+      <div>
+        <ion-col>
+          <ion-label class="title-style">Statistiques</ion-label>
+        </ion-col>
+      </div>
+      <div>
+        <span class="see-more">Voir tout</span>
+      </div>
+    </ion-row>
+
+    <div>
+      <apx-chart
+      [chart]="barOptions.chart!"
+      [series]="barOptions.series!"
+      [stroke]="barOptions.stroke!"
+      [markers]="barOptions.markers!"
+      [labels]="barOptions.labels!"
+      [grid]="barOptions.grid!"
+      [xaxis]="barOptions.xaxis!"
+      [yaxis]="barOptions.yaxis!"
+      [plotOptions]="barOptions.plotOptions!"
+      [dataLabels]="barOptions.dataLabels!"
+      [legend]="barOptions.legend!"
+      >
+      </apx-chart>
+    </div>
+
+    <div >
+      <ion-grid>
+        <ion-row class="level-style">
+          <div>
+            <span class="stats-title">Distance</span><br>
+            <span class="sub-title-item-prog">45km</span>
+          </div>
+          <div>
+            <ion-label class="stats-title">Calories</ion-label><br>
+            <ion-label class="sub-title-item-prog">165,8kcal</ion-label>
+          </div>
+
+          <div>
+            <ion-label class="stats-title">Durée</ion-label><br>
+            <ion-label class="sub-title-item-prog">2:00:45</ion-label>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

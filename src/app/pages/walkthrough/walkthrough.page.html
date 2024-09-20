@@ -1,0 +1,54 @@
+
+<ion-content [fullscreen]="true" scroll-y="false">
+  <swiper-container #wizardSlider (afterinit)="swiperReady()" (slidechange)="handleSlidechanged($event)">
+    <swiper-slide *ngFor="let item of slides; let i = index" class="bloc-slide" [ngStyle]="{'background-image': 'url(' + item.img + ')'}">
+      
+        <div *ngIf="i==0">
+          <!-- <div class="bloc-img">
+            <img height="130px" src="assets/imgs/fitness-logo.png" alt="Fitness App" />
+            <div class="logo">
+              <img height="60px" src="assets/imgs/logo.png" alt="Logo Fitness" />
+            </div>
+          </div -->
+          <ion-grid class="first-bloc">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="5"><ion-text class="txt-welcome">Bienvenue sur </ion-text> </ion-col>
+              <ion-col><img src="assets/imgs/communift.png" height="50px" /> </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col><span class="txt-app">Communifit <ion-text>c</ion-text> </span> </ion-col>
+            </ion-row>
+          </ion-grid>
+          <!-- <h3>Bienvenue</h3> -->  
+        </div>
+        <div class="custom-slider ion-text-center" *ngIf="i!=0">
+          <img src="{{item.banner}}" alt="Fitness App" />
+          <div class="ion-padding txt-description ion-text-center">
+            <h3>{{item.description}}</h3>
+          </div>
+          
+          <div class="ion-padding">
+            <div class="ion-text-center"><ion-icon src="{{item.progress}}"></ion-icon> </div>
+            <ion-button mode="ios" color="primary" shape="round" expand="block" mode="ios" (click)="changeSlide(1)" *ngIf="!is_beginning && !is_end">
+              {{'walkthrought.next' | translate}}
+            </ion-button>
+            <ion-button mode="ios" color="primary" shape="round" expand="block" mode="ios" (click)="goToLogin()" *ngIf="is_end">
+              {{'walkthrought.next' | translate}}
+            </ion-button>
+          </div>
+        </div>
+      
+    </swiper-slide>
+
+  </swiper-container>
+  
+
+<!--   <ion-button mode="ios" class="btn-skip" color="primary" fill="clear" (click)="skip()" *ngIf="!is_end">
+    {{'walkthrought.pass' | translate}} 
+  </ion-button> -->
+  <ion-button mode="ios" class="btn-finish" color="primary" fill="clear" (click)="changeSlide(1)" *ngIf="is_beginning">
+    {{'walkthrought.next' | translate}} <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+  </ion-button>
+  
+
+</ion-content>

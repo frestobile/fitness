@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-logo ion-text-center ion-margin-bottom">
+    <ion-label color="dark"><h1>Identifiez-vous</h1></ion-label>
+  </div> 
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list class="login-form ion-margin-top" lines="none">
+      <!-- <ion-label color="darkmedium"> {{'login.email' | translate}}</ion-label> -->
+      <ion-item>
+        <ion-icon name="mail" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.email" placeholder="{{'login.email' | translate}}" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+          {{'login.email_required' | translate}}
+        </p>
+      </ion-text>
+
+      <!-- <ion-label color="darkmedium"> {{'login.password' | translate}}</ion-label> -->
+      <ion-item>
+        <ion-icon name="lock-closed" slot="end"></ion-icon>
+        <ion-input [(ngModel)]="login.password" placeholder="{{'login.password' | translate}}" name="password" [type]="'password'" #password="ngModel" required>
+        </ion-input>
+        <!-- <ion-icon (click)="is_eye = !is_eye" [name]="!is_eye ? 'eye-outline':'eye-off-outline'" slot="end"></ion-icon> --> 
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          {{'login.password_required' | translate}}
+        </p>
+      </ion-text>
+    </ion-list>
+
+    <div class="ion-margin-top ion-margin-bottom">
+      <ion-button enterkey="send" mode="ios" shape="round" [disabled]="is_pending" color="primary" (click)="onLogin(loginForm)" type="submit" expand="block">{{'login.login' | translate}} <ion-spinner *ngIf="is_pending" color="light"></ion-spinner> </ion-button>
+    </div>
+  </form>
+    <p class="ion-text-center ion-margin-top btn-forgot">
+      <ion-button (click)="openForgotPwd()" fill="clear" mode="ios" color="primary">{{'login.ask_forgot_password' | translate}}</ion-button>
+    </p>
+
+    <div class="ion-text-center no_account">
+    <div class="ion-text-center txt-or">
+      <div class="line"></div>
+      <div class="txt-middle">ou continuer avec</div>
+    </div>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col></ion-col>
+        <ion-col> <img src="{{img_fb}}" alt="Facebook" height="40px" /> </ion-col>
+        <ion-col> <img src="{{img_google}}" alt="Google" height="40px" /> </ion-col>
+        <ion-col> <img src="{{img_apple}}" alt="Apple" height="40px" /> </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    
+  </div>
+
+    <!-- 
+      <div class="ion-text-center ion-margin-top">
+      <p>&dash;&dash; ou continuer avec &dash;&dash;</p>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col></ion-col>
+          <ion-col class="ion-text-center" (click)="loginByGoogle()">
+            <img height="40px" [src]="img_google" alt="Fitness" />
+          </ion-col>
+          <ion-col class="ion-text-center" (click)="loginByFacebook()"> 
+            <img height="40px" [src]="img_fb" alt="Fb" />
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+      --> 
+</ion-content>

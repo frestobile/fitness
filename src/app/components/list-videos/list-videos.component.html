@@ -1,0 +1,13 @@
+<swiper-container slides-per-view="1.70">
+  <swiper-slide *ngFor="let obj of videos">
+    <ion-row>
+      <div (click)="displayVideos(obj)">
+        <ion-icon class="icon-play" src="assets/icon/player.svg"></ion-icon>
+        <video class="video-style" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline"
+          crossorigin="anonymous">
+          <source src="https://www.youtube.com/shorts/EE-uIufjCho" type="video/mp4">
+        </video>
+      </div>
+    </ion-row>
+  </swiper-slide>
+</swiper-container>

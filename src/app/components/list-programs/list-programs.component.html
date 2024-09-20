@@ -1,0 +1,30 @@
+<swiper-container slides-per-view="1.20">
+  <swiper-slide class="bloc_coach" *ngFor="let obj of programs | slice:0:6">
+    <ion-card (click)="showProgram(obj)">
+      <img [src]="getImage(obj)" class="img-entrainement" />
+      <div class="bloc-content">
+        <span class="padding-label-primary" color="light">{{ obj.sporting_level }}</span>
+        <ion-item lines="none" color="transparent" class="session-item">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="8">
+                <label class="name">{{ obj.name }}</label>
+              </ion-col>
+              <ion-col size="4">
+                <label class="duration">{{ getDurations(obj.schedules) }}</label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="8">
+                <label class="count">{{ getExerciseCount(obj.schedules) }} exericses</label>
+              </ion-col>
+              <ion-col size="4">
+                <label class="price">{{ obj.price }}€</label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </div>
+    </ion-card>
+  </swiper-slide>
+</swiper-container>

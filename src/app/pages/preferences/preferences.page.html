@@ -1,0 +1,236 @@
+
+<ion-content [fullscreen]="true" scroll-y="false">
+  <swiper-container class="preferences-slider" #wizardSlider (afterinit)="swiperReady()" [pagination]="true" pagination-type="progressbar" (slidechange)="handleSlidechanged($event)">
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Parlez nous de vous</h3>
+        </div>
+        <div class="ion-padding custom-person">
+          <div class="bloc-gender" *ngFor="let obj of genders;let i = index;" [ngStyle]="{'background-image': !obj.checked ? 'url(' + obj.bg + '.png)': 'url(' + obj.bg + '_selected.png)'}" (click)="selectGender(obj, i)">
+            <img height="40px" [src]="obj.checked ? obj.icon_s: obj.icon" alt="Icon" /><br>
+            <ion-text [color]="obj.checked ? 'light':'medium'">{{obj.name}}</ion-text>
+          </div>
+        </div>
+      </div>      
+    </swiper-slide>
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Type d'utilisateur</h3>
+        </div>
+        <div class="ion-padding custom-type">
+          <div>
+            <ion-button class="ion-margin-bottom semi-bold" *ngFor="let item of persons; let i = index" mode="ios" expand="block" [color]="item.checked ? 'primary':'grislight'" (click)="selectType(item, i)" [disabled]="!item.active">
+                {{item.name}}
+            </ion-button>
+          </div>
+          
+        </div>
+      </div>      
+    </swiper-slide>
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Quelle est votre date de naissance ?</h3>
+        </div>
+        <div *ngIf="current_user" class="ion-padding custom-type">
+          <ion-datetime [(ngModel)]="current_user.birthday"  presentation="date" [preferWheel]="true" (ionChange)="selectedDate($event)"></ion-datetime>
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Quel est votre Poids (Kg) ?</h3>
+        </div>
+        <div class="ion-padding">
+          
+          <!-- <app-list-scroll>
+            </app-list-scroll>  -->   
+        
+          <!-- <swiper-container #poidsSlider [slidesPerView]="3" (afterinit)="swiperPoidsReady()" (slidechange)="handlePoidschanged($event)">
+            <swiper-slide *ngFor="let obj of [1,2,3,4,5]">
+              <h1 class="ion-text-center">{{obj}}</h1>
+              
+            </swiper-slide>
+          </swiper-container> -->
+          <ion-item lines="none" class="ion-text-center custom-poids">
+            <ion-input [(ngModel)]="weights" [min]="40" [max]="200" autofocus="true" label="" type="number" placeholder="55"></ion-input>
+          </ion-item>
+        </div>
+        <div class="bottom-img">
+           <img src="assets/imgs/balance.png" height="200px" alt="Poids" /> 
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Quel est votre taille (cm) ?</h3>
+        </div>
+        <div class="ion-padding">
+          
+          <ion-item lines="none" class="ion-text-center custom-poids">
+            <ion-input [(ngModel)]="heights" [min]="140" [max]="260" autofocus="true" label="" type="number" placeholder="163"></ion-input>
+          </ion-item>
+          <div class="bottom-img">
+            <!-- <img src="assets/icon/taille.png" height="200px" alt="Poids" /> --> 
+          </div>
+        </div>
+        
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Depuis combien de temps faites-vous du sport ?</h3>
+        </div>
+        <div class="ion-padding" *ngIf="current_user">
+
+          <ion-grid class="ion-text-center custom-poids custom-sport">
+            <ion-row class="ion-align-items-center">
+              <ion-col>
+                <ion-text>Années</ion-text>
+                <ion-input [(ngModel)]="years" [min]="1" autofocus="true"  labelPlacement="stacked" fill="outline" mode="md" type="number"></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-text>Mois</ion-text>
+                <ion-input [(ngModel)]="month" [min]="1" autofocus="true"  labelPlacement="stacked" fill="outline" mode="md" type="number"></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-text>Jours</ion-text>
+                <ion-input [(ngModel)]="days" [min]="1" autofocus="true"  labelPlacement="stacked" fill="outline" mode="md" type="number"></ion-input>
+              </ion-col>
+            </ion-row>
+            
+          </ion-grid>
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Combien de fois par semaine ?</h3>
+        </div>
+        <div class="ion-padding custom-type" *ngIf="current_user">
+          <ion-item lines="none" class="ion-text-center custom-poids">
+            <ion-input [(ngModel)]="times_per_week" [min]="0" [max]="10" autofocus="true" label="" type="number" placeholder="1"></ion-input>     
+          </ion-item>
+        </div>
+        <div class="discipline custom-form">
+          <ion-item lines="none">
+            <ion-select label="Dans quelle discipline ?" cancelText=" " [interfaceOptions]="customActionSheetOptions" interface="action-sheet" label-placement="floating">
+              <ion-select-option *ngFor="let obj of sport_types" value="{{obj.id}}">{{obj.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Faites-vous un régime ?</h3>
+        </div>
+        <div class="ion-padding custom-type custom-regime">
+          <div>
+            <ion-button size="large" class="ion-margin-bottom semi-bold" *ngFor="let item of regimes; let i = index" mode="ios" [color]="item.checked ? 'primary':'grislight'" (click)="selectRegime(item, i)">
+                {{item.name}}
+            </ion-button>
+          </div>
+          <div class="bottom-img">
+            <!-- <img src="assets/icon/regime.svg" height="200px" alt="Poids" /> --> 
+          </div>
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div *ngIf="current_user" class="ion-padding ion-text-center">
+          <h3 *ngIf="current_user.role=='client'">Quels sont vos objectifs ?</h3>
+          <h3 *ngIf="current_user.role=='coach'">Quels sont vos compétences ?</h3>
+        </div>
+        <div class="ion-padding custom-type"> 
+          <div class="bloc-goals">
+            <ion-item lines="none" color="grislight" *ngFor="let item of tags; let i = index">
+              <ion-checkbox justify="space-between" [checked]="item.checked" (ionChange)="handleChecked($event, item, i)">
+                  {{item.name}}
+              </ion-checkbox>
+            </ion-item>
+          </div>
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <swiper-slide *ngIf="current_user && current_user.role=='client'" class="bloc-slide">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding ion-text-center">
+          <h3>Niveau d'activité physique</h3>
+        </div>
+        <div class="ion-padding custom-type">
+          <div>
+            <ion-button class="ion-margin-bottom" *ngFor="let item of levels; let i = index" mode="ios" [strong]="true" expand="block" [color]="item.checked ? 'primary':'grislight'" (click)="selectLevel(item, i)">
+                {{item.name}}
+            </ion-button>
+          </div>
+          
+        </div>
+      </div>      
+    </swiper-slide>
+
+    <!-- 
+      <swiper-slide class="bloc-slide" [ngStyle]="{'background-image': 'url(' + bg_mic + ')'}">
+      
+      <div class="custom-slider ion-text-center">
+        <div class="ion-padding custom-mic">
+          <h4 *ngIf="mic"> Votre IMC est égale à {{mic | number}}</h4>
+          <h3> </h3>
+        </div>
+        <div class="ion-padding">
+          
+          <div class="bottom-icon">
+            <ion-icon src="assets/icon/fitness_woman.svg" ></ion-icon>
+          </div>
+        </div>
+        
+      </div>      
+    </swiper-slide>
+      --> 
+
+  </swiper-container>
+  
+
+  <ion-button mode="ios" class="btn-skip" color="dark" fill="clear" (click)="previousPage()" *ngIf="(!from_settings && !is_beginning) || from_settings">
+    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+  </ion-button>  
+  <ion-button mode="ios" class="btn-skip btn-skip2" color="dark" fill="clear" (click)="skip()" *ngIf="!is_end">
+    {{'walkthrought.pass' | translate}}
+  </ion-button>  
+  <!-- <ion-button mode="ios" class="btn-finish" color="dark" fill="clear" (click)="changeSlide(1)" *ngIf="!is_end">
+    {{'walkthrought.next' | translate}}
+  </ion-button> --> 
+  <ion-button mode="ios" class="btn-finish" color="primary" shape="round" [strong]="true" expand="block" (click)="changeSlide(1)" *ngIf="!is_end">
+    {{'walkthrought.next' | translate}}
+  </ion-button>
+  <ion-button [disabled]="is_pending" mode="ios" shape="round" class="btn-finish" color="primary" expand="block" (click)="goToHome()" *ngIf="is_end">
+    Suivant <ion-spinner *ngIf="is_pending" name="dots"></ion-spinner>
+  </ion-button>
+  
+
+</ion-content>

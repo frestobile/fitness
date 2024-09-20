@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'faq.faqs' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let obj of faqs;let i = index" value="{{i}}">
+      <ion-item slot="header" color="grislight">
+        <ion-label class="ion-text-wrap"><h3>{{obj.q}}</h3></ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>{{obj.r}}</p> 
+      </div>
+    </ion-accordion>
+   </ion-accordion-group> 
+</ion-content>

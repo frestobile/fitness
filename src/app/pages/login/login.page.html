@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bloc-choice">
+    <h2 class="ion-text-center">Connectez-vous</h2>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center" (click)="loginGoogle()">
+        <ion-col size="4" class="ion-text-center">
+          <img [src]="img_google" alt="Fitness" />
+        </ion-col>
+        <ion-col size="8"> 
+          <ion-label>Continuer avec Google</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" (click)="loginFacebook()">
+        <ion-col size="4" class="ion-text-center">
+          <img [src]="img_fb" alt="Fb" />
+        </ion-col>
+        <ion-col size="8"> 
+          <ion-label>Continuer avec Facebook</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4" class="ion-text-center">
+          <img [src]="img_apple" alt="Apple" />
+        </ion-col>
+        <ion-col size="8"> 
+          <ion-label>Continuer avec Apple</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="ion-text-center txt-or">
+      <div class="line"></div>
+      <div class="txt-middle">ou</div>
+    </div>
+
+    <ion-button mode="ios" color="primary" shape="round" expand="block" mode="ios" (click)="loginWithOdoo()">
+      Continuer avec votre Email
+    </ion-button>
+
+    <div class="ion-text-center no_account">
+      <ion-text color="medium">Vouns n'avez pas de compte ? </ion-text>
+      <ion-text color="primary" (click)="goToSignUp()">Créer un compte</ion-text>
+      <!-- <ion-button mode="ios" color="primary" fill="clear" size="small" [strong]="true" (click)="goToSignUp()">Créer un compte</ion-button> -->
+    </div>
+  </div>
+</ion-content>

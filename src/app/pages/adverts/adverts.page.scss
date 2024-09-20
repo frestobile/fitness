@@ -1,0 +1,27 @@
+.custom-form {
+    ion-item{
+        margin-bottom: 1.5rem;
+    }
+}
+
+.bloc-img{
+    height: 120px;
+    padding: 15px;
+    ion-icon{
+        font-size: 3rem;
+    }
+    img{
+        object-fit: cover;
+    }
+}
+
+ion-card{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.resume-pub{
+    ion-label{
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,33 @@
+.bloc-menus{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-item{
+        margin-bottom: 1.2rem;
+        border-radius: 15px;
+        text-align: center;
+        .text-book{
+            padding: 30px 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ion-icon {
+                color: #fff;
+                font-size: 24px;
+                margin-left: 8px;
+            }
+        }
+        .badge {
+            width: 14px;
+            height: 14px;
+            background-color: #f00;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            border: solid 2px #fff;
+        }
+    }
+}

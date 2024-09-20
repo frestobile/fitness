@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" class="mt-0">
+        <ion-icon slot="icon-only" name="arrow-back" color="black"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="medium">{{notification_title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="content-style">
+    <ion-item *ngFor="let item of notification_list" >
+      <ion-avatar class="my-3" slot="start">
+        <img [src]="item.image" alt="Lock" />
+      </ion-avatar>
+      <ion-label class="notification-content" (click)="gotoDetailPage(item.id)">
+        <p [ngClass]="{'active': item.read_at === null}">{{ item.content }}</p>
+      </ion-label>
+      <ion-note color="medium" slot="end" size="10">
+        {{item.created_at}}
+      </ion-note>
+    </ion-item>
+
+
+  </ion-list>
+
+</ion-content>

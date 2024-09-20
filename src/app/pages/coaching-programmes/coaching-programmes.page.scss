@@ -1,0 +1,15 @@
+.list-boot{
+    padding: 10px;
+}
+
+.custom-program ion-row{
+    margin-top: 15px;
+    p{
+        color: var(--ion-color-medium);
+        text-align: justify;
+    }
+
+    p, ion-text{
+        font-weight: bold;
+    }
+}

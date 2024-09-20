@@ -1,0 +1,124 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Create Program</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <!-- <ion-button (click)="gotoForward()" fill="clear">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card class="bloc-img" (click)="updatePhoto()">
+    <div *ngIf="!isUploaded" class="ion-padding ion-text-center empty-img">
+      <ion-icon name="image-outline"></ion-icon> <br>
+      <ion-note>Ajouter une bannière de votre programme</ion-note>
+    </div>
+    <img *ngIf="isUploaded" src="{{imgLogo}}" alt="Fitness Profile" />
+  </ion-card>
+
+  <ion-list class="custom-form">
+    <ion-item lines="none">
+      <ion-toggle justify="space-between" [enableOnOffLabels]="true" (ionChange)="handleActiveToogle($event)">Activer/Désactiver</ion-toggle>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-toggle justify="space-between" [enableOnOffLabels]="true" (ionChange)="handlePrivateToogle($event)">Private/Public</ion-toggle>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text" label="Nom de la program" labelPlacement="stacked" [(ngModel)]="new_program.name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text" label="But de la séance" labelPlacement="stacked" [(ngModel)]="new_program.objective"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-select label="Select sporting level" cancelText="Annuler" interface="action-sheet" (ionChange)="selectSportingLevel($event)" label-placement="floating">
+        <ion-select-option *ngFor="let obj of levels" [value]="obj.name">{{obj.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="current_user" lines="none" class="inPrix">
+      <ion-input type="number" label="Prix ({{new_program.currency.name}})" labelPlacement="stacked" [(ngModel)]="new_program.price"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="date" [min]="current_date" label="Date de début" labelPlacement="stacked" [(ngModel)]="new_program.start_date"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-textarea label="Description" labelPlacement="stacked" placeholder="Décrivez votre programme" rows="2" [(ngModel)]="new_program.description"></ion-textarea>
+    </ion-item>
+
+    <ion-item lines="none" (click)="openModal()">
+      <ion-label>
+        <h2>Add Exercises</h2>
+      </ion-label>
+      <ion-icon name="add" slot="end" class="add-circle-icon"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+  <div class="ion-margin-top">
+    <ion-button [disabled]="isLoading" mode="ios" [strong]="true" (click)="onPub()" expand="block" color="primary" shape="round">
+      Soumettre <ion-spinner name="dots" *ngIf="isLoading" ></ion-spinner>
+    </ion-button>
+  </div>
+
+  <ion-modal #modal [isOpen]="is_opened" (didDismiss)="closeModal($event)">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Formulaire publicité</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="onClose()" fill="clear">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list class="custom-form">
+          <ion-item lines="none">
+            <ion-select label="Select Exercise" cancelText="Annuler" interface="action-sheet" (ionChange)="selectExercise($event)" label-placement="floating">
+              <ion-select-option *ngFor="let ex_obj of exercises" [value]="ex_obj.id">{{ex_obj.title}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input type="number" label="Reps(x): " labelPlacement="stacked" [(ngModel)]="reps"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input type="number" label="Time(s): " labelPlacement="stacked" [(ngModel)]="times"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input type="number" label="Weight(kg): " labelPlacement="stacked" [(ngModel)]="weights"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input type="number" label="Rest(s): " labelPlacement="stacked" [(ngModel)]="rests"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="ion-margin-top">
+          <ion-button mode="ios" [strong]="true" (click)="chooseExercises()" expand="block" color="primary" shape="round">
+            Add Exercise
+          </ion-button>
+        </div>
+
+        <ion-list class="exercise-form mt-8">
+          <ion-item lines="none" class="mb-4" *ngFor="let e_schedule of schedules">
+            <ion-label>
+              <span>{{ e_schedule.exercise.title }}</span>
+              <span>{{ e_schedule.reps }} séries</span>
+              <span>{{ e_schedule.time }} min</span>
+              <span>{{ e_schedule.rest }} min</span>
+              <span>{{ e_schedule.weight }} kg</span>
+            </ion-label>
+            <ion-icon name="trash" slot="end" class="delete-circle-icon"></ion-icon>
+          </ion-item>
+
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

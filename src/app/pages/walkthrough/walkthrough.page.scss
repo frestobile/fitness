@@ -1,0 +1,98 @@
+swiper-container {
+    height: 100%;
+}
+
+  .btn-skip {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  .bloc-slide{
+    background-repeat: no-repeat;
+    background-size: cover;
+    .bloc-img{
+      // position: absolute;
+      // top: 100px;
+      // left: 26%;
+      // text-align: center;
+      margin-top: 24rem;
+      margin-bottom: 5%;
+    }
+    .logo{
+      opacity: 0.7;
+    }
+
+    h3{
+      color: var(--ion-color-light);
+      font-weight: 900;
+      font-size: 1.45rem;
+    }
+    p{
+      // margin-top: 90px;
+      margin-bottom: 50px;
+      color: var(--ion-color-light);
+      padding: 10px;
+      font-size: 1.15rem;
+      // font-family: "Urbanist-Light";
+    }
+  }
+
+  .custom-slider{
+    h3{
+      color: var(--ion-color-dark);
+    }
+
+    div ion-icon{
+      font-size: 2.3rem;
+    }
+
+    .txt-description{
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+
+  .btn-bottom{
+    ion-button{
+      font-weight: 900;
+      font-family: "Urbanist-Bold";
+      font-size: 1.1rem;
+    }
+  }
+
+
+  .btn-finish{
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  .btn-finish, .btn-skip{
+    font-family: "Urbanist-Bold";
+  }
+
+  .first-bloc{
+    margin-top: 63vh;
+    padding: 20px;
+    ion-col ion-text, ion-col span{
+      color: var(--ion-color-light);
+    }
+  }
+
+  .txt-welcome{
+    font-size: 1.2rem;
+  }
+
+  .txt-app{
+    font-size: 3.4rem;
+    font-family: "Yackien";
+    ion-text{
+      font-family: "Yackien-Swash";
+      position: absolute;
+      font-size: 1.2rem;
+      left: 8px;
+    }
+  }
